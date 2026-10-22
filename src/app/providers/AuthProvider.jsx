@@ -15,7 +15,6 @@ export function AuthProvider({ children }) {
     try {
       await authService.logout();
     } catch {
-      // Ignore network errors during logout
     } finally {
       try { localStorage.removeItem('t360_has_session'); } catch {}
       setUser(null);
@@ -47,7 +46,6 @@ export function AuthProvider({ children }) {
     }
   }, [loadCandidateProfile]);
 
-  // Attempt initial session restore on page refresh
   useEffect(() => {
     let isMounted = true;
 
@@ -66,7 +64,6 @@ export function AuthProvider({ children }) {
         return;
       }
       try {
-        // Try refresh token endpoint with credentials
         const refreshRes = await authService.refreshToken();
         if (refreshRes && isMounted) {
           const userInfo = {
@@ -80,12 +77,10 @@ export function AuthProvider({ children }) {
               const profile = await candidateService.getCandidate('me');
               if (isMounted) setCandidateProfile(profile);
             } catch {
-              // Ignore
             }
           }
         }
       } catch {
-        // Not authenticated or expired session
         if (isMounted) {
           setUser(null);
           setCandidateProfile(null);

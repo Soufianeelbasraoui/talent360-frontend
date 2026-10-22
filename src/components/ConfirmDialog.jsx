@@ -2,19 +2,6 @@ import { Modal } from './Modal';
 import { Button } from './Button';
 import { AlertTriangle } from 'lucide-react';
 
-/**
- * Confirmation dialog for destructive actions.
- * @param {Object} props
- * @param {boolean} props.isOpen
- * @param {() => void} props.onClose
- * @param {() => void} props.onConfirm
- * @param {string} props.title
- * @param {string} props.message
- * @param {string} [props.confirmLabel='Delete']
- * @param {string} [props.cancelLabel='Cancel']
- * @param {boolean} [props.isLoading=false]
- * @param {'danger'|'primary'} [props.variant='danger']
- */
 export function ConfirmDialog({
   isOpen,
   onClose,

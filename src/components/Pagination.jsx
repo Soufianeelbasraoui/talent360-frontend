@@ -1,14 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './Button';
 
-/**
- * Standard server-side pagination bar.
- * @param {Object} props
- * @param {number} props.currentPage - 0-indexed
- * @param {number} props.totalPages
- * @param {(page: number) => void} props.onPageChange
- * @param {number} [props.totalElements]
- */
 export function Pagination({ currentPage, totalPages, onPageChange, totalElements }) {
   if (totalPages <= 1) return null;
 

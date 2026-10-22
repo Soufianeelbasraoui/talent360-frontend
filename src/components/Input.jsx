@@ -1,17 +1,6 @@
 import { forwardRef } from 'react';
 import clsx from 'clsx';
 
-/**
- * Standard Accessible Input with 5px radius and error states.
- * @param {Object} props
- * @param {string} [props.label]
- * @param {string} [props.error]
- * @param {string} [props.helperText]
- * @param {string} [props.id]
- * @param {string} [props.className]
- * @param {React.ReactNode} [props.leftIcon]
- * @param {React.ReactNode} [props.rightElement]
- */
 export const Input = forwardRef(function Input(
   {
     label,

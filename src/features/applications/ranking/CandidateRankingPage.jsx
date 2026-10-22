@@ -23,13 +23,11 @@ export function CandidateRankingPage() {
   const { id } = useParams();
   const { success: toastSuccess } = useToast();
 
-  // Load Job Offer
   const { data: job } = useQuery({
     queryKey: ['job', id],
     queryFn: () => jobService.getJobById(Number(id)),
   });
 
-  // Load AI Matching Candidates
   const {
     data: rankingData,
     isLoading,
@@ -42,7 +40,6 @@ export function CandidateRankingPage() {
         const aiRanked = await aiService.matchCandidatesForJob(Number(id));
         if (aiRanked && aiRanked.length > 0) return aiRanked;
       } catch {
-        // Fallback to applications sorted by score
       }
       const apps = await applicationService.getJobApplications(Number(id), 0, 50, 'matchingScore,desc');
       return (apps?.content || []).map(a => ({
@@ -168,7 +165,7 @@ export function CandidateRankingPage() {
             return (
               <Card key={cand.candidateId || idx} className="p-3 mb-0 hover-card">
                 <div className="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
-                  {/* Left: Rank + Avatar + Name + Explanation */}
+                  
                   <div className="d-flex align-items-start gap-3 flex-grow-1">
                     <ScoreRing score={score} size={50} />
 
@@ -181,14 +178,12 @@ export function CandidateRankingPage() {
                         <span className="text-muted small">({cand.candidateEmail})</span>
                       </div>
 
-                      {/* AI Snippet Summary */}
                       {explanation.summary && (
                         <p className="small text-muted mb-2 fst-italic">
                           &ldquo;{explanation.summary}&rdquo;
                         </p>
                       )}
 
-                      {/* Matching & Missing Skills */}
                       <div className="d-flex flex-wrap align-items-center gap-3 mt-1">
                         {explanation.matchingSkills && explanation.matchingSkills.length > 0 && (
                           <div className="d-flex align-items-center gap-1 flex-wrap">
@@ -215,7 +210,6 @@ export function CandidateRankingPage() {
                     </div>
                   </div>
 
-                  {/* Actions */}
                   <div className="d-flex align-items-center gap-2 align-self-end align-self-lg-center flex-shrink-0">
                     <Button
                       variant="secondary"

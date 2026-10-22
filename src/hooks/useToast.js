@@ -1,9 +1,6 @@
 import { useContext } from 'react';
 import { ToastContext } from '@/app/providers/ToastProvider';
 
-/**
- * Hook to trigger toast notifications across the application.
- */
 export function useToast() {
   const context = useContext(ToastContext);
   if (!context) {

@@ -2,14 +2,12 @@
 @import 'bootstrap/scss/bootstrap';
 @import './bootstrap-overrides';
 
-// App Layout Structure
 .app-container {
   display: flex;
   min-height: 100vh;
   background-color: $background;
 }
 
-// Sidebar
 .app-sidebar {
   width: 240px;
   background-color: $surface;
@@ -83,7 +81,6 @@
   }
 }
 
-// Main Viewport
 .app-main {
   flex: 1;
   margin-left: 240px;
@@ -94,7 +91,6 @@
   transition: margin-left 0.2s ease-in-out;
 }
 
-// Topbar
 .app-topbar {
   height: 60px;
   background-color: $surface;
@@ -108,7 +104,6 @@
   z-index: 1010;
 }
 
-// Content Area
 .app-content {
   flex: 1;
   padding: 1.5rem;
@@ -116,7 +111,6 @@
   width: 100%;
 }
 
-// Mobile sidebar overlay & offcanvas
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -144,7 +138,6 @@
   }
 }
 
-// AI Theme Elements
 .ai-badge {
   display: inline-flex;
   align-items: center;
@@ -169,7 +162,6 @@
   border-left: 3px solid $ai-emerald !important;
 }
 
-// Match Score Indicator Rings
 .match-score-ring {
   position: relative;
   display: inline-flex;
@@ -196,7 +188,6 @@
   }
 }
 
-// Status badges
 .badge-status-new {
   background-color: $status-new-bg;
   color: $status-new;
@@ -227,7 +218,6 @@
   border: 1px solid $status-rejected-border;
 }
 
-// Skill Tags
 .skill-tag {
   display: inline-flex;
   align-items: center;
@@ -254,7 +244,6 @@
   }
 }
 
-// Responsive table card fallback on small screens
 @media (max-width: 575.98px) {
   .table-responsive-stack {
     thead {

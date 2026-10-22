@@ -1,12 +1,6 @@
 import clsx from 'clsx';
 import { ApplicationStatus, JobStatus } from '@/constants/enums';
 
-/**
- * StatusBadge mapping job and application lifecycle statuses to defined color styles.
- * @param {Object} props
- * @param {string} props.status
- * @param {string} [props.className]
- */
 export function StatusBadge({ status, className = '' }) {
   if (!status) return null;
 

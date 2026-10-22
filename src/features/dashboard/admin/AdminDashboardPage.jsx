@@ -45,7 +45,6 @@ export function AdminDashboardPage() {
 
   const recentUsers = usersData?.content || [];
 
-  // User growth analytics data for Recharts
   const growthData = [
     { month: 'May', users: 14, applications: 28 },
     { month: 'Jun', users: 22, applications: 45 },
@@ -102,7 +101,6 @@ export function AdminDashboardPage() {
         </Link>
       </div>
 
-      {/* 4 Stat Cards Row */}
       <div className="row g-3 mb-4">
         <div className="col-12 col-sm-6 col-xl-3">
           <Card className="h-100 p-3 border-0 shadow-sm">
@@ -149,7 +147,6 @@ export function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* User Growth & Platform Usage Chart */}
       <Card
         header={
           <div className="d-flex align-items-center justify-content-between">
@@ -204,7 +201,6 @@ export function AdminDashboardPage() {
         </div>
       </Card>
 
-      {/* Recent Users Data Table */}
       <Card
         header={
           <div className="d-flex align-items-center justify-content-between">

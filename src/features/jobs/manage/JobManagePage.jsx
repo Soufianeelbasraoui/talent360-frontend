@@ -27,7 +27,6 @@ export function JobManagePage() {
   const { success: toastSuccess, error: toastError } = useToast();
   const [page, setPage] = useState(0);
 
-  // Confirm dialog state
   const [deleteTargetId, setDeleteTargetId] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -207,7 +206,6 @@ export function JobManagePage() {
         </Card>
       )}
 
-      {/* Delete Confirmation Dialog */}
       <ConfirmDialog
         isOpen={Boolean(deleteTargetId)}
         onClose={() => setDeleteTargetId(null)}

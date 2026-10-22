@@ -1,13 +1,6 @@
 import { AlertCircle, RotateCcw } from 'lucide-react';
 import { Button } from './Button';
 
-/**
- * Standard error state display with retry trigger.
- * @param {Object} props
- * @param {string} [props.title='Unable to load data']
- * @param {string} [props.message='Check your connection and try again.']
- * @param {() => void} [props.onRetry]
- */
 export function ErrorState({
   title = 'Unable to load data',
   message = 'Check your connection and try again.',

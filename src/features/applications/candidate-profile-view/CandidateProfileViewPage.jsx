@@ -79,7 +79,6 @@ export function CandidateProfileViewPage() {
         </Link>
       </div>
 
-      {/* Header Info Card */}
       <Card className="p-4 mb-4">
         <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
           <div className="d-flex align-items-center gap-3">
@@ -135,16 +134,15 @@ export function CandidateProfileViewPage() {
       </Card>
 
       <div className="row g-4">
-        {/* Left Column: Details & Bio */}
+        
         <div className="col-12 col-lg-8">
-          {/* Bio */}
+          
           {candidate.bio && (
             <Card header={<div className="fw-semibold">Professional Summary</div>} className="mb-4">
               <p className="text-dark small leading-relaxed mb-0">{candidate.bio}</p>
             </Card>
           )}
 
-          {/* Skills */}
           <Card header={<div className="fw-semibold">Technical Skills</div>} className="mb-4">
             <div className="d-flex flex-wrap gap-1">
               {(candidate.skills || ['Java', 'Spring Boot', 'MySQL']).map(s => (
@@ -153,7 +151,6 @@ export function CandidateProfileViewPage() {
             </div>
           </Card>
 
-          {/* Experience & Education */}
           <Card header={<div className="fw-semibold">Background</div>} className="mb-4">
             <div className="row g-3">
               <div className="col-sm-6">
@@ -172,7 +169,6 @@ export function CandidateProfileViewPage() {
           </Card>
         </div>
 
-        {/* Right Column: AI Analysis Summary Panel */}
         <div className="col-12 col-lg-4">
           <Card
             className="p-3 mb-4 border-success ai-container bg-white"
@@ -213,7 +209,6 @@ export function CandidateProfileViewPage() {
             </div>
           </Card>
 
-          {/* Links */}
           {(candidate.linkedin || candidate.github) && (
             <Card header={<div className="fw-semibold">External Links</div>} className="mb-4">
               {candidate.linkedin && (

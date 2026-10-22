@@ -37,7 +37,6 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 
-// 5 Columns
 const COLUMNS = [
   { id: ApplicationStatus.NEW, label: 'New', color: 'border-primary' },
   { id: ApplicationStatus.SCREENING, label: 'Screening', color: 'border-warning' },
@@ -120,13 +119,11 @@ export function ApplicationsKanbanPage() {
   const [aiRankingEnabled, setAiRankingEnabled] = useState(false);
   const [activeDragItem, setActiveDragItem] = useState(null);
 
-  // Load Job info
   const { data: job } = useQuery({
     queryKey: ['job', id],
     queryFn: () => jobService.getJobById(Number(id)),
   });
 
-  // Load Applications
   const {
     data: applicationsData,
     isLoading,
@@ -137,7 +134,6 @@ export function ApplicationsKanbanPage() {
     queryFn: () => applicationService.getJobApplications(Number(id), 0, 100),
   });
 
-  // Local state for optimistic updates
   const [appsList, setAppsList] = useState([]);
 
   useEffect(() => {
@@ -146,7 +142,6 @@ export function ApplicationsKanbanPage() {
     }
   }, [applicationsData]);
 
-  // Mutation to update application status with rollback on failure
   const mutation = useMutation({
     mutationFn: ({ appId, newStatus }) =>
       applicationService.updateApplicationStatus(appId, newStatus),
@@ -167,7 +162,6 @@ export function ApplicationsKanbanPage() {
     useSensor(KeyboardSensor)
   );
 
-  // Group applications by status column
   const columnData = useMemo(() => {
     let list = [...appsList];
     if (aiRankingEnabled) {
@@ -197,7 +191,6 @@ export function ApplicationsKanbanPage() {
     const activeApp = appsList.find(a => a.id === activeId);
     if (!activeApp) return;
 
-    // Determine target column
     let targetColumn = null;
     if (COLUMNS.some(c => c.id === over.id)) {
       targetColumn = over.id;
@@ -209,7 +202,6 @@ export function ApplicationsKanbanPage() {
     }
 
     if (targetColumn && targetColumn !== activeApp.status) {
-      // Optimistic update
       const previousList = [...appsList];
       setAppsList(prev =>
         prev.map(app => (app.id === activeId ? { ...app, status: targetColumn } : app))
@@ -221,7 +213,7 @@ export function ApplicationsKanbanPage() {
 
   return (
     <div>
-      {/* Header with back navigation & AI sort toggle */}
+      
       <div className="mb-3">
         <Link to={ROUTES.RECRUITER_JOBS} className="text-muted small text-decoration-none d-inline-flex align-items-center gap-1">
           <ChevronLeft size={14} />
@@ -245,7 +237,7 @@ export function ApplicationsKanbanPage() {
         </div>
 
         <div className="d-flex align-items-center gap-2">
-          {/* AI Ranking Toggle */}
+          
           <button
             type="button"
             className={clsx(
@@ -276,7 +268,6 @@ export function ApplicationsKanbanPage() {
         />
       )}
 
-      {/* Kanban Columns */}
       {!isLoading && !isError && (
         <DndContext
           sensors={sensors}

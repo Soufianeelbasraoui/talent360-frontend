@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { APP_CONFIG } from '@/constants/config';
 
-/**
- * In-memory token storage (never localStorage / sessionStorage).
- */
 let inMemoryAccessToken = null;
 let inMemoryRefreshToken = null;
 let onLogoutCallback = null;
@@ -53,9 +50,6 @@ export function clearAuthSession() {
   }
 }
 
-/**
- * Configured Axios instance with credentials and base URL.
- */
 export const axiosClient = axios.create({
   baseURL: APP_CONFIG.API_BASE_URL,
   headers: {
@@ -64,9 +58,6 @@ export const axiosClient = axios.create({
   withCredentials: true,
 });
 
-/**
- * Request interceptor to attach Bearer token.
- */
 axiosClient.interceptors.request.use(
   config => {
     if (inMemoryAccessToken && !config.headers.Authorization) {
@@ -77,9 +68,6 @@ axiosClient.interceptors.request.use(
   error => Promise.reject(error)
 );
 
-/**
- * Response interceptor for automatic 401 refresh queuing and replay.
- */
 let isRefreshing = false;
 let failedQueue = [];
 
@@ -99,7 +87,6 @@ axiosClient.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
 
-    // Avoid infinite loop on auth endpoints
     if (
       !error.response ||
       error.response.status !== 401 ||

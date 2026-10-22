@@ -2,16 +2,6 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 
-/**
- * Accessible modal dialog with 5px radius and ESC key dismiss.
- * @param {Object} props
- * @param {boolean} props.isOpen
- * @param {() => void} props.onClose
- * @param {string} [props.title]
- * @param {'sm'|'md'|'lg'|'xl'} [props.size='md']
- * @param {React.ReactNode} [props.footer]
- * @param {React.ReactNode} props.children
- */
 export function Modal({ isOpen, onClose, title, size = 'md', footer, children }) {
   useEffect(() => {
     const handleKeyDown = e => {

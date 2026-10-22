@@ -1,72 +1,64 @@
-// Talent360 Design Tokens
-// 4px spacing grid, Inter typography, 5px radius everywhere, human-crafted SaaS aesthetic
 
-// Fonts
 $font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 $font-family-base: $font-family-sans-serif;
 $font-size-root: 16px;
-$font-size-base: 0.875rem; // 14px default body
-$font-size-sm: 0.75rem;    // 12px
-$font-size-md: 0.875rem;   // 14px
-$font-size-lg: 1rem;       // 16px
-$font-size-xl: 1.25rem;    // 20px
-$font-size-2xl: 1.5rem;    // 24px
-$font-size-3xl: 1.875rem;  // 30px
+$font-size-base: 0.875rem;
+$font-size-sm: 0.75rem;
+$font-size-md: 0.875rem;
+$font-size-lg: 1rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
 
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 
-// Color Palette
-$primary: #4F46E5;        // Deep Indigo
+$primary: #4F46E5;
 $primary-hover: #4338CA;
 $primary-light: #EEF2FF;
 $primary-border: #C7D2FE;
 
-$background: #F9FAFB;     // Soft light gray
-$surface: #FFFFFF;        // Pure white
+$background: #F9FAFB;
+$surface: #FFFFFF;
 $surface-hover: #F3F4F6;
-$border-color: #E5E7EB;   // 1px clean crisp border
+$border-color: #E5E7EB;
 $border-color-subtle: #F3F4F6;
 
-$text-main: #111827;      // Dark slate
-$text-muted: #6B7280;     // Muted text
-$text-light: #9CA3AF;     // Subdued placeholder
+$text-main: #111827;
+$text-muted: #6B7280;
+$text-light: #9CA3AF;
 
-// AI Theme: Emerald green exclusively for AI features
 $ai-emerald: #10B981;
 $ai-emerald-hover: #059669;
 $ai-emerald-bg: #ECFDF5;
 $ai-emerald-border: #A7F3D0;
 $ai-emerald-text: #065F46;
 
-// Workflow / Application Statuses
-$status-new: #3B82F6;         // Blue
+$status-new: #3B82F6;
 $status-new-bg: #EFF6FF;
 $status-new-border: #BFDBFE;
 
-$status-screening: #F59E0B;   // Amber
+$status-screening: #F59E0B;
 $status-screening-bg: #FFFBEB;
 $status-screening-border: #FDE68A;
 
-$status-offer: #8B5CF6;       // Purple
+$status-offer: #8B5CF6;
 $status-offer-bg: #F5F3FF;
 $status-offer-border: #DDD6FE;
 
-$status-hired: #10B981;       // Green
+$status-hired: #10B981;
 $status-hired-bg: #ECFDF5;
 $status-hired-border: #A7F3D0;
 
-$status-rejected: #6B7280;    // Gray
+$status-rejected: #6B7280;
 $status-rejected-bg: #F3F4F6;
 $status-rejected-border: #E5E7EB;
 
-// Destructive
 $danger: #EF4444;
 $danger-bg: #FEF2F2;
 $danger-border: #FECACA;
 
-// HARD RULE: 5px Border Radius Everywhere!
 $border-radius: 5px;
 $border-radius-sm: 5px;
 $border-radius-lg: 5px;
@@ -74,22 +66,20 @@ $border-radius-xl: 5px;
 $border-radius-2xl: 5px;
 $border-radius-pill: 5px;
 
-// Shadows (Subtle, max 0 1px 2px rgba(0,0,0,0.06))
 $box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 $box-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
 $box-shadow-lg: 0 1px 3px rgba(0, 0, 0, 0.08);
 
-// Spacing
 $spacer: 1rem;
 $spacers: (
   0: 0,
-  1: 0.25rem, // 4px
-  2: 0.5rem,  // 8px
-  3: 0.75rem, // 12px
-  4: 1rem,    // 16px
-  5: 1.25rem, // 20px
-  6: 1.5rem,  // 24px
-  8: 2rem,    // 32px
-  10: 2.5rem, // 40px
-  12: 3rem    // 48px
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+  8: 2rem,
+  10: 2.5rem,
+  12: 3rem
 );

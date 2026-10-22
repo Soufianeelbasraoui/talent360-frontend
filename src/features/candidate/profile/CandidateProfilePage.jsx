@@ -49,7 +49,6 @@ export function CandidateProfilePage() {
               parsedPreferences = JSON.parse(candidate.preferencesJson);
             }
           } catch {
-            // Ignore parse error
           }
 
           reset({
@@ -133,7 +132,7 @@ export function CandidateProfilePage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="pb-5">
-      {/* Header with sticky save bar */}
+      
       <div className="d-flex align-items-center justify-content-between mb-4 sticky-top bg-light py-2" style={{ zIndex: 10 }}>
         <div>
           <h1 className="fs-4 fw-bold text-dark mb-1">Edit Profile</h1>
@@ -144,7 +143,6 @@ export function CandidateProfilePage() {
         </Button>
       </div>
 
-      {/* Section 1: Personal Info */}
       <Card header={<div className="fw-semibold">Personal Information</div>} className="mb-4">
         <div className="row g-3">
           <div className="col-md-6">
@@ -182,7 +180,6 @@ export function CandidateProfilePage() {
         </div>
       </Card>
 
-      {/* Section 2: Bio */}
       <Card header={<div className="fw-semibold">Bio &amp; Professional Summary</div>} className="mb-4">
         <div className="mb-3">
           <label htmlFor="bio-input" className="form-label">
@@ -198,7 +195,6 @@ export function CandidateProfilePage() {
         </div>
       </Card>
 
-      {/* Section 3: Skills Tag Input */}
       <Card header={<div className="fw-semibold">Skills &amp; Competencies</div>} className="mb-4">
         <p className="text-muted small mb-3">Add key technologies and tools that the AI matcher will use to evaluate your fit.</p>
         <div className="d-flex align-items-center gap-2 mb-3">
@@ -230,7 +226,6 @@ export function CandidateProfilePage() {
         </div>
       </Card>
 
-      {/* Section 4: Experience & Education */}
       <Card header={<div className="fw-semibold">Experience &amp; Education</div>} className="mb-4">
         <div className="row g-3">
           <div className="col-md-6">
@@ -253,7 +248,6 @@ export function CandidateProfilePage() {
         </div>
       </Card>
 
-      {/* Section 5: Preferences */}
       <Card header={<div className="fw-semibold">Job Preferences</div>} className="mb-4">
         <div className="row g-3">
           <div className="col-md-6">

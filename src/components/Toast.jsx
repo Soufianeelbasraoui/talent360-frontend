@@ -1,14 +1,6 @@
 import clsx from 'clsx';
 import { CheckCircle2, AlertCircle, Info } from 'lucide-react';
 
-/**
- * Toast item component.
- * @param {Object} props
- * @param {string} props.id
- * @param {'success'|'error'|'info'} props.type
- * @param {string} props.message
- * @param {() => void} props.onDismiss
- */
 export function ToastItem({ type = 'info', message, onDismiss }) {
   const icon =
     type === 'success' ? (
@@ -45,12 +37,6 @@ export function ToastItem({ type = 'info', message, onDismiss }) {
   );
 }
 
-/**
- * Toast container fixed at top-right.
- * @param {Object} props
- * @param {Array<{ id: string, type: 'success'|'error'|'info', message: string }>} props.toasts
- * @param {(id: string) => void} props.onDismiss
- */
 export function ToastContainer({ toasts = [], onDismiss }) {
   if (toasts.length === 0) return null;
 

@@ -2,23 +2,6 @@ import clsx from 'clsx';
 import { Skeleton } from './Skeleton';
 import { EmptyState } from './EmptyState';
 
-/**
- * @typedef {Object} Column
- * @property {string} header
- * @property {string} [accessor]
- * @property {(row: any) => React.ReactNode} [render]
- * @property {string} [className]
- */
-
-/**
- * Accessible, responsive data table with automatic mobile card stacking.
- * @param {Object} props
- * @param {Column[]} props.columns
- * @param {any[]} props.data
- * @param {boolean} [props.isLoading=false]
- * @param {string} [props.emptyMessage='No records found.']
- * @param {string} [props.className]
- */
 export function DataTable({
   columns,
   data = [],

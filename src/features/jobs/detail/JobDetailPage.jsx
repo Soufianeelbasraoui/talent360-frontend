@@ -84,7 +84,7 @@ export function JobDetailPage() {
 
   return (
     <div>
-      {/* Back button */}
+      
       <div className="mb-3">
         <Link to={ROUTES.JOBS} className="text-muted small text-decoration-none d-inline-flex align-items-center gap-1">
           <ChevronLeft size={14} />
@@ -93,7 +93,7 @@ export function JobDetailPage() {
       </div>
 
       <div className="row g-4">
-        {/* Main Job Body */}
+        
         <div className="col-12 col-lg-8">
           <Card className="p-4 mb-4">
             <div className="d-flex align-items-start justify-content-between gap-3 mb-3">
@@ -138,7 +138,6 @@ export function JobDetailPage() {
               </div>
             </div>
 
-            {/* Description rendered safely with DOMPurify */}
             <div className="mb-4">
               <h2 className="fs-6 fw-semibold text-dark mb-2">Job Description</h2>
               <div
@@ -147,7 +146,6 @@ export function JobDetailPage() {
               />
             </div>
 
-            {/* Required Skills */}
             <div className="mb-4">
               <h2 className="fs-6 fw-semibold text-dark mb-2">Required Skills</h2>
               <div className="d-flex flex-wrap gap-1">
@@ -157,7 +155,6 @@ export function JobDetailPage() {
               </div>
             </div>
 
-            {/* Apply button for Candidate */}
             {user?.role === Role.CANDIDATE && (
               <div className="pt-3 border-top d-flex align-items-center justify-content-between">
                 <Button
@@ -176,9 +173,8 @@ export function JobDetailPage() {
           </Card>
         </div>
 
-        {/* Sidebar Breakdown */}
         <div className="col-12 col-lg-4">
-          {/* Match Score Breakdown Sidebar */}
+          
           {user?.role === Role.CANDIDATE && (
             <Card
               className="p-3 mb-4 border-success ai-container bg-white"
@@ -196,7 +192,6 @@ export function JobDetailPage() {
                 Calculated by analyzing your registered skills, verified experience, and work preferences against this position.
               </p>
 
-              {/* Progress Bar 1: Skills 55/60 */}
               <div className="mb-3">
                 <div className="d-flex justify-content-between small mb-1">
                   <span className="fw-medium text-dark">Skills Match</span>
@@ -207,7 +202,6 @@ export function JobDetailPage() {
                 </div>
               </div>
 
-              {/* Progress Bar 2: Experience 25/25 */}
               <div className="mb-3">
                 <div className="d-flex justify-content-between small mb-1">
                   <span className="fw-medium text-dark">Experience Level</span>
@@ -218,7 +212,6 @@ export function JobDetailPage() {
                 </div>
               </div>
 
-              {/* Progress Bar 3: Education 8/10 */}
               <div className="mb-3">
                 <div className="d-flex justify-content-between small mb-1">
                   <span className="fw-medium text-dark">Education Fit</span>
@@ -229,7 +222,6 @@ export function JobDetailPage() {
                 </div>
               </div>
 
-              {/* Progress Bar 4: Preferences 4/5 */}
               <div className="mb-2">
                 <div className="d-flex justify-content-between small mb-1">
                   <span className="fw-medium text-dark">Preferences &amp; Location</span>
@@ -242,7 +234,6 @@ export function JobDetailPage() {
             </Card>
           )}
 
-          {/* Department / Company Summary Card */}
           <Card className="p-3 mb-4">
             <h3 className="fs-6 fw-semibold text-dark mb-2">About the Department</h3>
             <div className="d-flex align-items-center gap-2 mb-2 text-dark fw-medium small">

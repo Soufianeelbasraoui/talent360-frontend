@@ -34,13 +34,11 @@ export function JobListPage() {
   const isCandidate = Boolean(isAuthenticated && user?.role === Role.CANDIDATE);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Active Tab: 'recommended' (candidate only) or 'all'
   const requestedTab = searchParams.get('tab');
   const activeTab = (requestedTab === 'recommended' && !isCandidate)
     ? 'all'
     : (requestedTab || (isCandidate ? 'recommended' : 'all'));
 
-  // Filters from URL
   const keywordParam = searchParams.get('keyword') || '';
   const locationParam = searchParams.get('location') || '';
   const contractTypeParam = searchParams.get('contractType') || '';
@@ -51,7 +49,6 @@ export function JobListPage() {
   const [searchInput, setSearchInput] = useState(keywordParam);
   const debouncedSearch = useDebounce(searchInput, 300);
 
-  // Sync debounced search to URL
   useEffect(() => {
     setSearchParams(
       prev => {
@@ -68,10 +65,8 @@ export function JobListPage() {
     );
   }, [debouncedSearch, setSearchParams]);
 
-  // Expanded card for "Why this job?" panel
   const [expandedJobId, setExpandedJobId] = useState(null);
 
-  // Load jobs query
   const queryParams = useMemo(() => {
     return {
       keyword: keywordParam || undefined,
@@ -130,14 +125,13 @@ export function JobListPage() {
 
   return (
     <div>
-      {/* Header and Tabs */}
+      
       <div className="mb-4">
         <h1 className="fs-4 fw-bold text-dark mb-1">Browse Opportunities</h1>
         <p className="text-muted small mb-3">
           Explore open positions or review positions matched to your profile with AI.
         </p>
 
-        {/* Tab selection */}
         <div className="d-flex border-bottom">
           <button
             type="button"
@@ -173,7 +167,6 @@ export function JobListPage() {
         </div>
       </div>
 
-      {/* Filters & Search Row */}
       <div className="row g-2 mb-4">
         <div className="col-12 col-md-4">
           <Input
@@ -248,10 +241,8 @@ export function JobListPage() {
         </div>
       </div>
 
-      {/* Loading Skeleton */}
       {isLoading && <Skeleton count={4} height={120} className="mb-3" />}
 
-      {/* Error State */}
       {isError && (
         <ErrorState
           title="Failed to load job listings"
@@ -260,7 +251,6 @@ export function JobListPage() {
         />
       )}
 
-      {/* Empty State */}
       {!isLoading && !isError && jobsList.length === 0 && (
         <Card>
           <EmptyState
@@ -279,7 +269,6 @@ export function JobListPage() {
         </Card>
       )}
 
-      {/* Job Cards List */}
       {!isLoading && !isError && jobsList.length > 0 && (
         <div className="d-flex flex-column gap-3">
           {jobsList.map(job => {
@@ -319,7 +308,6 @@ export function JobListPage() {
                         <span>{formatExperienceLevel(job.experienceLevel)}</span>
                       </div>
 
-                      {/* Skill Pills */}
                       <div className="d-flex flex-wrap gap-1">
                         {(job.requiredSkills || []).map(skill => (
                           <SkillTag key={skill} name={skill} />
@@ -328,7 +316,6 @@ export function JobListPage() {
                     </div>
                   </div>
 
-                  {/* Actions & "Why this job?" toggle */}
                   <div className="d-flex align-items-center gap-2 align-self-end align-self-md-center">
                     <Button
                       variant="secondary"
@@ -346,7 +333,6 @@ export function JobListPage() {
                   </div>
                 </div>
 
-                {/* Expanded "Why this job?" Panel */}
                 {isExpanded && (
                   <div className="mt-3 pt-3 border-top bg-light p-3 rounded">
                     <div className="d-flex align-items-center gap-2 mb-2">
@@ -388,7 +374,6 @@ export function JobListPage() {
             );
           })}
 
-          {/* Pagination */}
           <Pagination
             currentPage={pageParam}
             totalPages={totalPages}

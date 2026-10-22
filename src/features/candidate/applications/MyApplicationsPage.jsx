@@ -124,7 +124,6 @@ export function MyApplicationsPage() {
                   </div>
                 </div>
 
-                {/* Horizontal Progress Stepper */}
                 <div className="pt-3 border-top">
                   {isRejected ? (
                     <div className="alert alert-secondary py-2 px-3 mb-0 small text-muted d-flex align-items-center gap-2">
@@ -133,7 +132,7 @@ export function MyApplicationsPage() {
                     </div>
                   ) : (
                     <div className="position-relative">
-                      {/* Step track line */}
+                      
                       <div
                         className="position-absolute top-50 start-0 translate-middle-y w-100 bg-light"
                         style={{ height: '3px', zIndex: 1 }}

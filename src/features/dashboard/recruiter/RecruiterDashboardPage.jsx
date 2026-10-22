@@ -36,13 +36,11 @@ export function RecruiterDashboardPage() {
   const jobs = jobsData?.content || [];
   const activeJobsCount = jobs.filter(j => j.status === 'OPEN').length || 8;
 
-  // Realistic mock / calculated stats
   const totalApplications = 126;
   const totalCandidates = 97;
   const aiAnalyzedCount = 110;
   const topCandidatesCount = 24;
 
-  // Chart data: applications per job
   const chartData = [
     { job: 'Senior Java Lead', applications: 38 },
     { job: 'Full-Stack React', applications: 29 },
@@ -52,7 +50,6 @@ export function RecruiterDashboardPage() {
     { job: 'Data Analyst', applications: 5 },
   ];
 
-  // Recent activity feed
   const recentActivities = [
     {
       id: 1,
@@ -90,7 +87,7 @@ export function RecruiterDashboardPage() {
 
   return (
     <div>
-      {/* Welcome Header */}
+      
       <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 mb-4">
         <div>
           <h1 className="fs-4 fw-bold text-dark mb-1">Recruitment Dashboard</h1>
@@ -105,7 +102,6 @@ export function RecruiterDashboardPage() {
         </Link>
       </div>
 
-      {/* 5 Stat Cards Row */}
       <div className="row g-3 mb-4">
         <div className="col-12 col-sm-6 col-xl">
           <Card className="h-100 p-3 border-0 shadow-sm">
@@ -164,7 +160,7 @@ export function RecruiterDashboardPage() {
       </div>
 
       <div className="row g-4">
-        {/* Applications per Job Chart */}
+        
         <div className="col-12 col-lg-7">
           <Card
             header={
@@ -200,7 +196,6 @@ export function RecruiterDashboardPage() {
           </Card>
         </div>
 
-        {/* Recent Activity Feed */}
         <div className="col-12 col-lg-5">
           <Card
             header={

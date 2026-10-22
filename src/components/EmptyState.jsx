@@ -1,13 +1,5 @@
 import { FolderOpen } from 'lucide-react';
 
-/**
- * Standard empty state component with helpful copy and optional CTA.
- * @param {Object} props
- * @param {string} props.title
- * @param {string} props.description
- * @param {React.ReactNode} [props.icon]
- * @param {React.ReactNode} [props.action]
- */
 export function EmptyState({
   title = 'No items found',
   description = 'There is currently no information to show.',

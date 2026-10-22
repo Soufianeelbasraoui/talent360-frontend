@@ -19,7 +19,6 @@ export function AdminUsersPage() {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Delete dialog state
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -37,7 +36,6 @@ export function AdminUsersPage() {
   const totalPages = usersData?.totalPages || 0;
   const totalElements = usersData?.totalElements || 0;
 
-  // Filter client-side by search term
   const filteredUsers = allUsers.filter(u =>
     u.email.toLowerCase().includes(searchTerm.toLowerCase().trim())
   );
@@ -151,7 +149,6 @@ export function AdminUsersPage() {
         </div>
       </div>
 
-      {/* Search Input */}
       <div className="mb-3" style={{ maxWidth: '360px' }}>
         <Input
           placeholder="Filter by email address..."
@@ -189,7 +186,6 @@ export function AdminUsersPage() {
         </Card>
       )}
 
-      {/* Delete User Confirmation */}
       <ConfirmDialog
         isOpen={Boolean(deleteTarget)}
         onClose={() => setDeleteTarget(null)}

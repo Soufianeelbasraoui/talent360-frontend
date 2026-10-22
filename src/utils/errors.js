@@ -1,17 +1,7 @@
-/**
- * @file Central error parsing and user-friendly error message extraction.
- */
 
-/**
- * Extracts a concise, human-crafted error message from an API error response.
- * @param {any} error
- * @param {string} [defaultMessage]
- * @returns {string}
- */
 export function getErrorMessage(error, defaultMessage = 'An unexpected error occurred. Please try again.') {
   if (!error) return defaultMessage;
 
-  // Axios response error
   if (error.response) {
     const data = error.response.data;
     const status = error.response.status;
@@ -46,7 +36,6 @@ export function getErrorMessage(error, defaultMessage = 'An unexpected error occ
     }
   }
 
-  // Network / client error
   if (error.request) {
     return 'Could not connect to the server. Check your connection and try again.';
   }

@@ -2,7 +2,6 @@ import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 export const handlers = [
-  // Auth login
   http.post('http://localhost:8080/api/auth/login', async ({ request }) => {
     const body = await request.json();
     if (body.email === 'invalid@example.com') {
@@ -19,7 +18,6 @@ export const handlers = [
     });
   }),
 
-  // Auth refresh
   http.post('http://localhost:8080/api/auth/refresh', () => {
     return HttpResponse.json({
       accessToken: 'refreshed-access-token',
@@ -32,7 +30,6 @@ export const handlers = [
     });
   }),
 
-  // Jobs listing
   http.get('http://localhost:8080/api/jobs', ({ request }) => {
     const url = new URL(request.url);
     const keyword = url.searchParams.get('keyword');
@@ -81,7 +78,6 @@ export const handlers = [
     });
   }),
 
-  // Applications
   http.post('http://localhost:8080/api/applications', async ({ request }) => {
     const body = await request.json();
     if (body.jobOfferId === 999) {
@@ -102,7 +98,6 @@ export const handlers = [
     );
   }),
 
-  // Candidate me
   http.get('http://localhost:8080/api/candidates/me', () => {
     return HttpResponse.json({
       id: 1,

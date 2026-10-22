@@ -32,11 +32,9 @@ export function CvUploadPage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isSavingReview, setIsSavingReview] = useState(false);
 
-  // Active CV Document
   const existingDocs = candidateProfile?.documents || [];
   const activeDocument = existingDocs[existingDocs.length - 1];
 
-  // AI Analysis Result state (editable by candidate)
   const [analysisResult, setAnalysisResult] = useState(null);
   const [newSkillInput, setNewSkillInput] = useState('');
 
@@ -91,7 +89,6 @@ export function CvUploadPage() {
       toastSuccess('CV uploaded successfully. Running AI extraction...');
       await refreshProfile();
 
-      // Trigger AI Analysis
       setIsAnalyzing(true);
       try {
         const aiData = await aiService.analyzeCv(uploadedDoc.id);
@@ -171,7 +168,6 @@ export function CvUploadPage() {
         </p>
       </div>
 
-      {/* Existing CV card if uploaded */}
       {activeDocument && (
         <Card className="mb-4 bg-white border">
           <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
@@ -203,7 +199,6 @@ export function CvUploadPage() {
         </Card>
       )}
 
-      {/* Large Drag & Drop Upload Zone */}
       <Card className="mb-4 text-center p-0 border">
         <div
           onDragOver={handleDragOver}
@@ -260,7 +255,6 @@ export function CvUploadPage() {
         </div>
       </Card>
 
-      {/* Analyzing Loader Indicator */}
       {isAnalyzing && (
         <Card className="mb-4 p-4 text-center border-success bg-white">
           <div className="d-flex align-items-center justify-content-center gap-2 text-success mb-2">
@@ -273,7 +267,6 @@ export function CvUploadPage() {
         </Card>
       )}
 
-      {/* AI Analysis Result Card (Editable) */}
       {analysisResult && (
         <Card
           className="mb-4 border-success ai-container bg-white"
@@ -289,7 +282,7 @@ export function CvUploadPage() {
             </div>
           }
         >
-          {/* Green Confirmation Banner */}
+          
           <div className="alert alert-success d-flex align-items-center gap-2 py-2 px-3 mb-4 rounded" style={{ fontSize: '0.8125rem' }}>
             <CheckCircle2 size={16} className="text-success flex-shrink-0" />
             <span>
@@ -298,7 +291,7 @@ export function CvUploadPage() {
           </div>
 
           <div className="row g-3">
-            {/* Extracted Skills */}
+            
             <div className="col-12">
               <span className="form-label fw-semibold d-block">Extracted Skills</span>
               <div className="d-flex flex-wrap gap-1 mb-2">
@@ -355,7 +348,6 @@ export function CvUploadPage() {
               </div>
             </div>
 
-            {/* Extracted Experience */}
             <div className="col-md-6">
               <Input
                 label="Years of Experience"
@@ -370,7 +362,6 @@ export function CvUploadPage() {
               />
             </div>
 
-            {/* Extracted Education */}
             <div className="col-md-6">
               <Input
                 label="Education / Degree"
@@ -384,7 +375,6 @@ export function CvUploadPage() {
               />
             </div>
 
-            {/* Languages */}
             <div className="col-12">
               <span className="form-label fw-semibold d-block">Languages</span>
               <div className="d-flex flex-wrap gap-1">

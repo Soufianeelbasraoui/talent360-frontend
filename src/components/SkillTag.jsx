@@ -1,14 +1,6 @@
 import clsx from 'clsx';
 import { X } from 'lucide-react';
 
-/**
- * SkillTag with optional matching/missing states and delete action.
- * @param {Object} props
- * @param {string} props.name
- * @param {'neutral'|'matching'|'missing'} [props.status='neutral']
- * @param {() => void} [props.onRemove]
- * @param {string} [props.className]
- */
 export function SkillTag({ name, status = 'neutral', onRemove, className = '' }) {
   return (
     <span

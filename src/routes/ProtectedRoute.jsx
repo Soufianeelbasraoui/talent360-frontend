@@ -3,9 +3,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { ROUTES } from '@/constants/routes';
 import { Skeleton } from '@/components/Skeleton';
 
-/**
- * Guard that requires an active authenticated session.
- */
 export function ProtectedRoute({ children }) {
   const { user, isLoading } = useAuth();
   const location = useLocation();

@@ -2,9 +2,6 @@ import React from 'react';
 import { AlertCircle, RotateCcw } from 'lucide-react';
 import { Button } from './Button';
 
-/**
- * Global React ErrorBoundary catching unexpected UI crashes without exposing stack traces.
- */
 export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +13,6 @@ export class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // In production we can log to a telemetry service like Sentry or Datadog
     console.error('ErrorBoundary caught:', error, errorInfo);
   }
 

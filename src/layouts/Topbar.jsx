@@ -3,11 +3,6 @@ import { Menu, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { Role } from '@/constants/enums';
 
-/**
- * Topbar navigation component with user information and mobile toggle.
- * @param {Object} props
- * @param {() => void} props.onToggleSidebar
- */
 export function Topbar({ onToggleSidebar }) {
   const { user, logout } = useAuth();
 

@@ -27,7 +27,6 @@ export function AppLayout() {
 
   const closeSidebar = () => setSidebarOpen(false);
 
-  // Build role-specific sidebar navigation items
   const renderNavLinks = () => {
     if (!user) return null;
 
@@ -182,14 +181,13 @@ export function AppLayout() {
 
   return (
     <div className="app-container">
-      {/* Mobile Backdrop */}
+      
       <div
         className={clsx('sidebar-overlay', sidebarOpen && 'open')}
         onClick={closeSidebar}
         aria-hidden="true"
       />
 
-      {/* Sidebar */}
       <aside className={clsx('app-sidebar', sidebarOpen && 'open')}>
         <div className="sidebar-header d-flex align-items-center gap-2">
           <div
@@ -228,7 +226,6 @@ export function AppLayout() {
         </div>
       </aside>
 
-      {/* Main View */}
       <div className="app-main">
         <Topbar onToggleSidebar={() => setSidebarOpen(prev => !prev)} />
         <main className="app-content">

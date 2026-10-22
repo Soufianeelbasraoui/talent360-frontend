@@ -171,7 +171,6 @@ export function AdminDepartmentsPage() {
         </Card>
       )}
 
-      {/* Create / Edit Department Modal */}
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -208,7 +207,6 @@ export function AdminDepartmentsPage() {
         </form>
       </Modal>
 
-      {/* Delete Confirmation Dialog */}
       <ConfirmDialog
         isOpen={Boolean(deleteTarget)}
         onClose={() => setDeleteTarget(null)}

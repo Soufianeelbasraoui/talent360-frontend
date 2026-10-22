@@ -1,9 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '@/app/providers/AuthProvider';
 
-/**
- * Hook to access current authentication state and actions.
- */
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

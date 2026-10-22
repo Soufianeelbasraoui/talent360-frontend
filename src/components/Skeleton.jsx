@@ -1,13 +1,5 @@
 import clsx from 'clsx';
 
-/**
- * Clean skeleton placeholder for loading states.
- * @param {Object} props
- * @param {number} [props.count=1]
- * @param {number|string} [props.height=20]
- * @param {number|string} [props.width='100%']
- * @param {string} [props.className]
- */
 export function Skeleton({ count = 1, height = 20, width = '100%', className = '' }) {
   const items = Array.from({ length: count });
 

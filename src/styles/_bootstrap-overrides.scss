@@ -1,6 +1,5 @@
 @import './variables';
 
-// General Body & Reset
 body {
   font-family: $font-family-base;
   font-size: $font-size-base;
@@ -10,14 +9,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-// 5px radius strictly enforced on all components
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-// Button overrides
 .btn {
   font-family: $font-family-base;
   font-size: $font-size-base;
@@ -122,7 +119,6 @@ body {
   font-size: $font-size-lg;
 }
 
-// Form Controls
 .form-control,
 .form-select {
   font-family: $font-family-base;
@@ -180,7 +176,6 @@ body {
   }
 }
 
-// Cards
 .card {
   background-color: $surface;
   border: 1px solid $border-color !important;
@@ -207,7 +202,6 @@ body {
   padding: 0.875rem 1.25rem;
 }
 
-// Modals
 .modal-content {
   border-radius: $border-radius !important;
   border: 1px solid $border-color !important;
@@ -224,7 +218,6 @@ body {
   padding: 0.875rem 1.25rem;
 }
 
-// Dropdowns
 .dropdown-menu {
   border-radius: $border-radius !important;
   border: 1px solid $border-color !important;
@@ -244,7 +237,6 @@ body {
   }
 }
 
-// Badges
 .badge {
   font-weight: $font-weight-medium;
   font-size: $font-size-sm;
@@ -253,7 +245,6 @@ body {
   line-height: 1.2;
 }
 
-// Tables
 .table {
   color: $text-main;
   border-color: $border-color;
@@ -283,7 +274,6 @@ body {
   }
 }
 
-// Tabs & Navigation
 .nav-tabs {
   border-bottom: 1px solid $border-color;
 
@@ -308,7 +298,6 @@ body {
   }
 }
 
-// Toast
 .toast {
   border-radius: $border-radius !important;
   border: 1px solid $border-color;

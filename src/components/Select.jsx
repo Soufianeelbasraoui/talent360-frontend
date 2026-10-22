@@ -1,17 +1,6 @@
 import { forwardRef } from 'react';
 import clsx from 'clsx';
 
-/**
- * Standard Accessible Select with 5px radius and error states.
- * @param {Object} props
- * @param {string} [props.label]
- * @param {string} [props.error]
- * @param {string} [props.helperText]
- * @param {string} [props.id]
- * @param {Array<{ label: string, value: string|number }>} [props.options]
- * @param {string} [props.placeholder]
- * @param {string} [props.className]
- */
 export const Select = forwardRef(function Select(
   {
     label,

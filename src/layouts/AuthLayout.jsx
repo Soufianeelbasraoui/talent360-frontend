@@ -1,13 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { Target, CheckCircle2 } from 'lucide-react';
 
-/**
- * Split-screen layout for authentication pages.
- */
 export function AuthLayout() {
   return (
     <div className="min-vh-100 d-flex flex-column flex-lg-row bg-white">
-      {/* Left Branded Panel */}
+      
       <div
         className="col-12 col-lg-5 p-4 p-xl-5 d-flex flex-column justify-content-between text-white"
         style={{
@@ -52,7 +49,6 @@ export function AuthLayout() {
           </div>
         </div>
 
-        {/* Abstract Human + AI Network Graphic */}
         <div className="d-none d-lg-flex justify-content-center my-4 py-2 opacity-75">
           <svg width="240" height="110" viewBox="0 0 240 110" fill="none">
             <line x1="30" y1="55" x2="90" y2="25" stroke="#4F46E5" strokeWidth="2" strokeDasharray="3 3" />
@@ -73,7 +69,6 @@ export function AuthLayout() {
         </div>
       </div>
 
-      {/* Right Form Container */}
       <div className="col-12 col-lg-7 d-flex align-items-center justify-content-center p-4 p-md-5">
         <div style={{ maxWidth: '440px', width: '100%' }}>
           <Outlet />

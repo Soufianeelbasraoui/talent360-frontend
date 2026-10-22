@@ -51,7 +51,7 @@ export function CandidateDashboardPage() {
 
   return (
     <div>
-      {/* Welcome Header */}
+      
       <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 mb-4">
         <div>
           <h1 className="fs-4 fw-bold text-dark mb-1">Welcome back, {candidateName}</h1>
@@ -66,7 +66,6 @@ export function CandidateDashboardPage() {
         </Link>
       </div>
 
-      {/* 4 Stat Cards Row */}
       <div className="row g-3 mb-4">
         <div className="col-12 col-sm-6 col-xl-3">
           <Card className="h-100 border-0 shadow-sm">
@@ -137,7 +136,6 @@ export function CandidateDashboardPage() {
         </div>
       </div>
 
-      {/* Recommended for You Section */}
       <div className="d-flex align-items-center justify-content-between mb-3">
         <div className="d-flex align-items-center gap-2">
           <Sparkles size={18} className="text-success" />

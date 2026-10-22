@@ -3,9 +3,6 @@ import { ToastContainer } from '@/components/Toast';
 
 export const ToastContext = createContext(null);
 
-/**
- * Toast Provider managing global flash toast notifications.
- */
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 

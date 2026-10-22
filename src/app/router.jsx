@@ -9,7 +9,6 @@ import { Role } from '@/constants/enums';
 import { Skeleton } from '@/components/Skeleton';
 import { useAuth } from '@/hooks/useAuth';
 
-// Suspense Fallback Loader
 function PageLoader() {
   return (
     <div className="p-4 w-100">
@@ -18,7 +17,6 @@ function PageLoader() {
   );
 }
 
-// Root Redirection Helper based on role
 function RootRedirect() {
   const { user, isLoading } = useAuth();
 
@@ -30,7 +28,6 @@ function RootRedirect() {
   return <Navigate to={ROUTES.CANDIDATE_DASHBOARD} replace />;
 }
 
-// Lazy Loaded Pages
 const LoginPage = lazy(() =>
   import('@/features/auth/pages/LoginPage').then(m => ({ default: m.LoginPage }))
 );
@@ -119,7 +116,6 @@ export const router = createBrowserRouter([
     path: ROUTES.ROOT,
     element: <RootRedirect />,
   },
-  // Public Auth Routes
   {
     element: <AuthLayout />,
     children: [
@@ -141,7 +137,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // Authenticated App Routes
   {
     element: (
       <ProtectedRoute>
@@ -149,7 +144,6 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      // Candidate Routes
       {
         path: ROUTES.CANDIDATE_DASHBOARD,
         element: (
@@ -207,7 +201,6 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Recruiter Routes
       {
         path: ROUTES.RECRUITER_DASHBOARD,
         element: (
@@ -269,7 +262,6 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Admin Routes
       {
         path: ROUTES.ADMIN_DASHBOARD,
         element: (
@@ -331,7 +323,6 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Shared Routes
       {
         path: ROUTES.SETTINGS,
         element: (

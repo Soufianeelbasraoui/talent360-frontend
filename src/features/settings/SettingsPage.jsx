@@ -56,7 +56,6 @@ export function SettingsPage() {
         </p>
       </div>
 
-      {/* Account Info */}
       <Card header={<div className="fw-semibold">Account Overview</div>} className="mb-4">
         <div className="row g-3">
           <div className="col-12">
@@ -78,7 +77,6 @@ export function SettingsPage() {
         </div>
       </Card>
 
-      {/* Change Password Form */}
       <Card header={<div className="fw-semibold">Change Password</div>} className="mb-4">
         <form onSubmit={handleSubmit(onSubmitPassword)}>
           <Input

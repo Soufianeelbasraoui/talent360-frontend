@@ -1,0 +1,316 @@
+@import './variables';
+
+// General Body & Reset
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $text-main;
+  background-color: $background;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 5px radius strictly enforced on all components
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Button overrides
+.btn {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  border-radius: $border-radius !important;
+  padding: 0.5rem 0.875rem;
+  transition: all 0.15s ease-in-out;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  line-height: 1.25;
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2) !important;
+    outline: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  color: #ffffff !important;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover !important;
+    border-color: $primary-hover !important;
+  }
+}
+
+.btn-secondary {
+  background-color: #ffffff !important;
+  border-color: $border-color !important;
+  color: $text-main !important;
+
+  &:hover:not(:disabled) {
+    background-color: $surface-hover !important;
+    border-color: #D1D5DB !important;
+    color: $text-main !important;
+  }
+}
+
+.btn-ai {
+  background-color: $ai-emerald !important;
+  border-color: $ai-emerald !important;
+  color: #ffffff !important;
+
+  &:hover:not(:disabled) {
+    background-color: $ai-emerald-hover !important;
+    border-color: $ai-emerald-hover !important;
+  }
+}
+
+.btn-outline-primary {
+  background-color: transparent !important;
+  border-color: $primary !important;
+  color: $primary !important;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-light !important;
+    color: $primary !important;
+  }
+}
+
+.btn-outline-danger {
+  background-color: transparent !important;
+  border-color: $danger !important;
+  color: $danger !important;
+
+  &:hover:not(:disabled) {
+    background-color: $danger-bg !important;
+    color: $danger !important;
+  }
+}
+
+.btn-danger {
+  background-color: $danger !important;
+  border-color: $danger !important;
+  color: #ffffff !important;
+
+  &:hover:not(:disabled) {
+    background-color: #DC2626 !important;
+    border-color: #DC2626 !important;
+  }
+}
+
+.btn-sm {
+  padding: 0.35rem 0.625rem;
+  font-size: $font-size-sm;
+}
+
+.btn-lg {
+  padding: 0.625rem 1.25rem;
+  font-size: $font-size-lg;
+}
+
+// Form Controls
+.form-control,
+.form-select {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $text-main;
+  background-color: $surface;
+  border: 1px solid $border-color;
+  border-radius: $border-radius !important;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &::placeholder {
+    color: $text-light;
+  }
+
+  &:focus {
+    border-color: $primary !important;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2) !important;
+    outline: none;
+    background-color: #ffffff;
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: #F3F4F6;
+    color: $text-muted;
+    cursor: not-allowed;
+  }
+}
+
+.form-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-main;
+  margin-bottom: 0.375rem;
+}
+
+.form-text {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  margin-top: 0.25rem;
+}
+
+.form-check-input {
+  border-radius: 3px !important;
+  border: 1px solid $border-color;
+
+  &:checked {
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+  }
+}
+
+// Cards
+.card {
+  background-color: $surface;
+  border: 1px solid $border-color !important;
+  border-radius: $border-radius !important;
+  box-shadow: $box-shadow;
+  margin-bottom: 1rem;
+}
+
+.card-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid $border-color;
+  padding: 0.875rem 1.25rem;
+  font-weight: $font-weight-semibold;
+  color: $text-main;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-footer {
+  background-color: #ffffff;
+  border-top: 1px solid $border-color;
+  padding: 0.875rem 1.25rem;
+}
+
+// Modals
+.modal-content {
+  border-radius: $border-radius !important;
+  border: 1px solid $border-color !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.modal-header {
+  border-bottom: 1px solid $border-color;
+  padding: 1rem 1.25rem;
+}
+
+.modal-footer {
+  border-top: 1px solid $border-color;
+  padding: 0.875rem 1.25rem;
+}
+
+// Dropdowns
+.dropdown-menu {
+  border-radius: $border-radius !important;
+  border: 1px solid $border-color !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  padding: 0.25rem 0;
+}
+
+.dropdown-item {
+  font-size: $font-size-base;
+  padding: 0.5rem 0.875rem;
+  color: $text-main;
+
+  &:hover,
+  &:focus {
+    background-color: $surface-hover;
+    color: $text-main;
+  }
+}
+
+// Badges
+.badge {
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+  padding: 0.25rem 0.5rem;
+  border-radius: $border-radius !important;
+  line-height: 1.2;
+}
+
+// Tables
+.table {
+  color: $text-main;
+  border-color: $border-color;
+  margin-bottom: 0;
+
+  > :not(caption) > * > * {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid $border-color;
+  }
+
+  thead th {
+    background-color: #F9FAFB;
+    color: $text-muted;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    border-bottom: 1px solid $border-color;
+  }
+
+  tbody tr {
+    transition: background-color 0.15s ease-in-out;
+
+    &:hover {
+      background-color: #F9FAFB;
+    }
+  }
+}
+
+// Tabs & Navigation
+.nav-tabs {
+  border-bottom: 1px solid $border-color;
+
+  .nav-link {
+    color: $text-muted;
+    font-weight: $font-weight-medium;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0 !important;
+    padding: 0.625rem 1rem;
+
+    &:hover {
+      color: $text-main;
+      border-color: transparent;
+    }
+
+    &.active {
+      color: $primary;
+      border-bottom-color: $primary;
+      background-color: transparent;
+    }
+  }
+}
+
+// Toast
+.toast {
+  border-radius: $border-radius !important;
+  border: 1px solid $border-color;
+  box-shadow: $box-shadow-lg;
+}

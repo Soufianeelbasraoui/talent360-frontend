@@ -12,7 +12,7 @@ import { ErrorState } from '@/components/ErrorState';
 import { Role } from '@/constants/enums';
 import { formatDate } from '@/utils/formatters';
 import { getErrorMessage } from '@/utils/errors';
-import { Search, UserCheck, UserX, Trash2, Shield, Users } from 'lucide-react';
+import { Search, UserCheck, UserX, Trash2 } from 'lucide-react';
 
 export function AdminUsersPage() {
   const { success: toastSuccess, error: toastError } = useToast();

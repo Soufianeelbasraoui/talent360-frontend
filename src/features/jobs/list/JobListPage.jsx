@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { jobService } from '@/api/jobService';
-import { aiService } from '@/api/aiService';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
@@ -22,13 +21,11 @@ import {
   Search,
   Sparkles,
   MapPin,
-  Briefcase,
   ChevronDown,
   ChevronUp,
   CheckCircle2,
   AlertCircle,
   ArrowRight,
-  Filter,
 } from 'lucide-react';
 import clsx from 'clsx';
 

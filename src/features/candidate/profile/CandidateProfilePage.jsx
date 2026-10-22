@@ -11,7 +11,7 @@ import { SkillTag } from '@/components/SkillTag';
 import { Skeleton } from '@/components/Skeleton';
 import { getErrorMessage } from '@/utils/errors';
 import { ContractType, WorkMode } from '@/constants/enums';
-import { Save, Plus, User, Phone, MapPin, Globe, Award } from 'lucide-react';
+import { Save, Plus, Phone, Globe, Award } from 'lucide-react';
 
 export function CandidateProfilePage() {
   const { user, candidateProfile, refreshProfile } = useAuth();

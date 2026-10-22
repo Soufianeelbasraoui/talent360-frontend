@@ -21,11 +21,9 @@ import {
   MapPin,
   Briefcase,
   Building2,
-  Calendar,
   Send,
   CheckCircle2,
   ChevronLeft,
-  Share2,
 } from 'lucide-react';
 
 export function JobDetailPage() {

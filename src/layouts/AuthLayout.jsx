@@ -1,5 +1,5 @@
-import { Outlet, Link } from 'react-router-dom';
-import { Target, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Outlet } from 'react-router-dom';
+import { Target, CheckCircle2 } from 'lucide-react';
 
 /**
  * Split-screen layout for authentication pages.

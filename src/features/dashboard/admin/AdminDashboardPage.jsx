@@ -5,8 +5,6 @@ import { jobService } from '@/api/jobService';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { DataTable } from '@/components/DataTable';
-import { Skeleton } from '@/components/Skeleton';
-import { ErrorState } from '@/components/ErrorState';
 import { ROUTES } from '@/constants/routes';
 import { Role } from '@/constants/enums';
 import { formatDate } from '@/utils/formatters';
@@ -15,9 +13,6 @@ import {
   UserCheck,
   Briefcase,
   Send,
-  Building2,
-  TrendingUp,
-  ArrowRight,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -33,9 +28,7 @@ export function AdminDashboardPage() {
   const {
     data: usersData,
     isLoading: isUsersLoading,
-    isError: isUsersError,
-    refetch,
-  } = useQuery({
+      } = useQuery({
     queryKey: ['admin-dashboard-users'],
     queryFn: () => userService.getAllUsers(0, 5),
   });

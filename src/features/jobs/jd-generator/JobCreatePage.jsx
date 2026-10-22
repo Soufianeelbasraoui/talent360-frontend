@@ -21,9 +21,6 @@ import {
   Send,
   RotateCcw,
   Edit3,
-  CheckCircle2,
-  Briefcase,
-  Building2,
 } from 'lucide-react';
 
 export function JobCreatePage() {
@@ -45,7 +42,7 @@ export function JobCreatePage() {
     queryFn: () => departmentService.getAllDepartments(),
   });
 
-  const { register, handleSubmit, getValues } = useForm({
+  const { register, getValues } = useForm({
     defaultValues: {
       title: 'Senior Java Backend Engineer',
       departmentId: departments[0]?.id || 1,
@@ -247,9 +244,10 @@ export function JobCreatePage() {
 
               {/* Skills Tag Input */}
               <div className="mb-3">
-                <label className="form-label">Required Skills</label>
+                <label htmlFor="required-skills-input" className="form-label">Required Skills</label>
                 <div className="d-flex gap-2 mb-2">
                   <input
+                    id="required-skills-input"
                     type="text"
                     className="form-control form-control-sm"
                     placeholder="e.g. Docker, Redis..."
@@ -336,8 +334,9 @@ export function JobCreatePage() {
               /* Editable Mode */
               <div>
                 <div className="mb-3">
-                  <label className="form-label">Position Title</label>
+                  <label htmlFor="edit-position-title" className="form-label">Position Title</label>
                   <input
+                    id="edit-position-title"
                     type="text"
                     className="form-control"
                     value={generatedJd.title}
@@ -345,8 +344,9 @@ export function JobCreatePage() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Description Summary</label>
+                  <label htmlFor="edit-jd-desc" className="form-label">Description Summary</label>
                   <textarea
+                    id="edit-jd-desc"
                     rows={4}
                     className="form-control"
                     value={generatedJd.description}
@@ -354,8 +354,9 @@ export function JobCreatePage() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Conditions / Benefits</label>
+                  <label htmlFor="edit-conditions" className="form-label">Conditions / Benefits</label>
                   <input
+                    id="edit-conditions"
                     type="text"
                     className="form-control"
                     value={generatedJd.conditions}

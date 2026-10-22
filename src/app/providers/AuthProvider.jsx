@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { authService } from '@/api/authService';
-import { userService } from '@/api/userService';
 import { candidateService } from '@/api/candidateService';
 import { setOnLogout, getAccessToken } from '@/api/axiosClient';
 import { Role } from '@/constants/enums';

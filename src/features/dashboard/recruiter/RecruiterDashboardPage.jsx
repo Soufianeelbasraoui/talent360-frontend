@@ -4,18 +4,13 @@ import { useAuth } from '@/hooks/useAuth';
 import { jobService } from '@/api/jobService';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
-import { Skeleton } from '@/components/Skeleton';
-import { ErrorState } from '@/components/ErrorState';
-import { StatusBadge } from '@/components/StatusBadge';
 import { ROUTES } from '@/constants/routes';
 import {
   Briefcase,
   Users,
-  Send,
   Sparkles,
   Award,
   Plus,
-  ArrowRight,
   TrendingUp,
 } from 'lucide-react';
 import {
@@ -33,10 +28,7 @@ export function RecruiterDashboardPage() {
 
   const {
     data: jobsData,
-    isLoading: isJobsLoading,
-    isError: isJobsError,
-    refetch,
-  } = useQuery({
+      } = useQuery({
     queryKey: ['recruiter', 'jobs'],
     queryFn: () => jobService.searchJobs({ size: 10 }),
   });

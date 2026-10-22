@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
-import { X } from 'lucide-react';
 
 /**
  * Accessible modal dialog with 5px radius and ESC key dismiss.

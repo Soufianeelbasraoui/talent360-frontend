@@ -65,7 +65,7 @@ export function RegisterPage() {
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         {/* Role Selector */}
         <div className="mb-3 text-start">
-          <label className="form-label">I am a</label>
+          <span className="form-label d-block">I am a</span>
           <div className="d-grid gap-2" style={{ gridTemplateColumns: '1fr 1fr' }}>
             <button
               type="button"

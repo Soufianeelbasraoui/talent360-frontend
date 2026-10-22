@@ -30,10 +30,7 @@ export function CandidateDashboardPage() {
 
   const {
     data: applicationsData,
-    isLoading: isAppsLoading,
-    isError: isAppsError,
-    refetch: refetchApps,
-  } = useQuery({
+      } = useQuery({
     queryKey: ['candidate', 'applications'],
     queryFn: () => applicationService.getMyApplications(0, 100),
   });

@@ -7,7 +7,7 @@ import { Card } from '@/components/Card';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { getErrorMessage } from '@/utils/errors';
-import { Lock, Save, Shield } from 'lucide-react';
+import { Lock, Save } from 'lucide-react';
 
 export function SettingsPage() {
   const { user } = useAuth();
@@ -18,8 +18,7 @@ export function SettingsPage() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm({
+      } = useForm({
     defaultValues: {
       currentPassword: '',
       newPassword: '',

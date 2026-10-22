@@ -12,23 +12,16 @@ import { AiBadge } from '@/components/AiBadge';
 import { Skeleton } from '@/components/Skeleton';
 import { ErrorState } from '@/components/ErrorState';
 import { EmptyState } from '@/components/EmptyState';
-import { ApplicationStatus } from '@/constants/enums';
-import { ROUTES } from '@/constants/routes';
-import { getErrorMessage } from '@/utils/errors';
 import {
   Medal,
   ChevronLeft,
   ArrowRight,
-  User,
   CheckCircle2,
-  AlertCircle,
-  Briefcase,
 } from 'lucide-react';
-import clsx from 'clsx';
 
 export function CandidateRankingPage() {
   const { id } = useParams();
-  const { success: toastSuccess, error: toastError } = useToast();
+  const { success: toastSuccess } = useToast();
 
   // Load Job Offer
   const { data: job } = useQuery({

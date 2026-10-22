@@ -16,11 +16,9 @@ import { formatDate, formatContractType } from '@/utils/formatters';
 import { getErrorMessage } from '@/utils/errors';
 import {
   Plus,
-  Users,
   CheckCircle,
   XCircle,
   Trash2,
-  ExternalLink,
   Kanban,
   Award,
 } from 'lucide-react';

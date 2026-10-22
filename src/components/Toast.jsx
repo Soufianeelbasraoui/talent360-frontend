@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Info } from 'lucide-react';
 
 /**
  * Toast item component.

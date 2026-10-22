@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { departmentService } from '@/api/departmentService';
 import { useToast } from '@/hooks/useToast';
@@ -196,8 +196,9 @@ export function AdminDepartmentsPage() {
           />
 
           <div className="mb-3 text-start">
-            <label className="form-label">Description (Optional)</label>
+            <label htmlFor="dept-description" className="form-label">Description (Optional)</label>
             <textarea
+              id="dept-description"
               rows={3}
               className="form-control"
               placeholder="Brief description of department scope..."

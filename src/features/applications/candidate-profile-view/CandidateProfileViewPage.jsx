@@ -11,16 +11,11 @@ import { useToast } from '@/hooks/useToast';
 import { formatDate } from '@/utils/formatters';
 import {
   ChevronLeft,
-  User,
   Mail,
   Phone,
   MapPin,
   Globe,
-  Award,
-  FileText,
   Download,
-  Calendar,
-  Sparkles,
   CheckCircle2,
 } from 'lucide-react';
 

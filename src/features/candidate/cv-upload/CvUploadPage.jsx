@@ -17,7 +17,6 @@ import {
   Download,
   Sparkles,
   CheckCircle2,
-  AlertCircle,
   Plus,
 } from 'lucide-react';
 import clsx from 'clsx';
@@ -301,7 +300,7 @@ export function CvUploadPage() {
           <div className="row g-3">
             {/* Extracted Skills */}
             <div className="col-12">
-              <label className="form-label fw-semibold">Extracted Skills</label>
+              <span className="form-label fw-semibold d-block">Extracted Skills</span>
               <div className="d-flex flex-wrap gap-1 mb-2">
                 {analysisResult.skills.map((s, idx) => (
                   <SkillTag
@@ -387,7 +386,7 @@ export function CvUploadPage() {
 
             {/* Languages */}
             <div className="col-12">
-              <label className="form-label fw-semibold">Languages</label>
+              <span className="form-label fw-semibold d-block">Languages</span>
               <div className="d-flex flex-wrap gap-1">
                 {analysisResult.languages.map((lang, idx) => (
                   <span key={idx} className="badge bg-light text-dark border me-1">

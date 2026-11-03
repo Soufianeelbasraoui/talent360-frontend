@@ -1,8 +1,11 @@
 import { axiosClient } from './axiosClient';
 
 export const aiService = {
-  async analyzeCv(candidateDocumentId) {
-    const response = await axiosClient.post('/api/ai/cv/analyze', { candidateDocumentId });
+  async analyzeCv(candidateDocumentId, forceReanalyze = false) {
+    const response = await axiosClient.post('/api/ai/cv/analyze', {
+      candidateDocumentId,
+      forceReanalyze,
+    });
     return response.data;
   },
 

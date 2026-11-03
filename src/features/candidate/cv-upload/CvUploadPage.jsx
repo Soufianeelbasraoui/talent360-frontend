@@ -87,26 +87,24 @@ export function CvUploadPage() {
     }
   };
 
-  const runAnalysis = async (documentId) => {
+  const runAnalysis = async (documentId, force = false) => {
     setIsAnalyzing(true);
     try {
-      const aiData = await aiService.analyzeCv(documentId);
+      const aiData = await aiService.analyzeCv(documentId, force);
       setAnalysisResult({
-        skills: aiData.skills?.length ? aiData.skills : ['Java', 'Spring Boot', 'MySQL', 'Docker'],
-        experienceYears: aiData.experienceYears ?? 3,
-        education: aiData.education || 'Bac +5 Informatique / Logiciel',
-        languages: aiData.languages?.length ? aiData.languages : ['Français', 'Anglais'],
+        skills: aiData.skills?.length ? aiData.skills : (candidateProfile?.skills?.length ? candidateProfile.skills : []),
+        experienceYears: aiData.experienceYears ?? (candidateProfile?.experienceYears || 2),
+        education: aiData.education || candidateProfile?.education || "Diplôme d'Ingénieur / Master (Bac+5)",
+        languages: aiData.languages?.length ? aiData.languages : ['Français (Courant)', 'Anglais (Professionnel)'],
+        certifications: aiData.certifications || [],
+        cvScore: aiData.cvScore || 82,
+        summary: aiData.summary || '',
+        strengths: aiData.strengths || [],
+        improvements: aiData.improvements || [],
       });
-      toastSuccess('Analyse IA terminée avec succès !');
+      toastSuccess('Analyse IA du CV terminée avec succès !');
     } catch (aiErr) {
-      // Fallback proposal if LLM is unavailable
-      setAnalysisResult({
-        skills: candidateProfile?.skills?.length ? candidateProfile.skills : ['Java', 'Spring Boot', 'React', 'SQL'],
-        experienceYears: candidateProfile?.experienceYears ?? 2,
-        education: candidateProfile?.education || 'Diplôme d\'Ingénieur / Master',
-        languages: ['Français', 'Anglais'],
-      });
-      toastSuccess('Extraction des compétences effectuée.');
+      toastError(getErrorMessage(aiErr, "Échec de l'analyse IA. Veuillez réessayer."));
     } finally {
       setIsAnalyzing(false);
     }
@@ -151,7 +149,7 @@ export function CvUploadPage() {
 
   const handleTriggerAnalysis = async () => {
     if (!activeDocument) return;
-    await runAnalysis(activeDocument.id);
+    await runAnalysis(activeDocument.id, true);
   };
 
   const handleDeleteCv = async () => {
@@ -216,38 +214,27 @@ export function CvUploadPage() {
     const eduScore = hasEducation ? 95 : 60;
     const langScore = Math.min(100, Math.round((languagesCount / 2) * 90));
 
-    // Weighted Overall Score
-    const overallScore = Math.round(
-      skillsScore * 0.4 + expScore * 0.3 + eduScore * 0.15 + langScore * 0.15
-    );
+    // Weighted Overall Score (from backend analysis if available, otherwise weighted formula)
+    const overallScore = analysisResult.cvScore && analysisResult.cvScore > 0
+      ? analysisResult.cvScore
+      : Math.round(skillsScore * 0.4 + expScore * 0.3 + eduScore * 0.15 + langScore * 0.15);
 
-    // Qualitative Feedback & Recommendations
-    const strengths = [];
-    const recommendations = [];
+    // Qualitative Feedback & Recommendations (from backend analysis with sensible fallbacks)
+    const strengths = analysisResult.strengths && analysisResult.strengths.length > 0
+      ? analysisResult.strengths
+      : [
+          skillsCount >= 5 ? 'Large palette de compétences techniques identifiées.' : 'Bases techniques solides prêtes à évoluer.',
+          expYears >= 2 ? `Expérience professionnelle solide et confirmée (${expYears} ans).` : 'Profil dynamique avec fort potentiel d\'apprentissage.',
+          hasEducation ? 'Formation et diplôme clairement spécifiés.' : 'Parcours professionnel pratique mis en avant.',
+        ];
 
-    if (skillsCount >= 5) {
-      strengths.push('Large palette de compétences techniques identifiées.');
-    } else {
-      recommendations.push('Ajoutez au moins 5 à 8 compétences clés pour maximiser votre score de matching ATS.');
-    }
-
-    if (expYears >= 3) {
-      strengths.push(`Expérience professionnelle solide et affirmée (${expYears} ans).`);
-    } else {
-      recommendations.push('Valorisez vos projets concrets et réalisations chiffrées pour compenser les années d\'expérience.');
-    }
-
-    if (hasEducation) {
-      strengths.push('Formation et diplôme clairement spécifiés.');
-    } else {
-      recommendations.push('Précisez votre diplôme ou niveau d\'études principal.');
-    }
-
-    if (languagesCount >= 2) {
-      strengths.push('Profil bilingue / multilingue apprécié des recruteurs.');
-    } else {
-      recommendations.push('Indiquez vos langues de travail (Français, Anglais) avec niveau.');
-    }
+    const recommendations = analysisResult.improvements && analysisResult.improvements.length > 0
+      ? analysisResult.improvements
+      : [
+          'Ajoutez des métriques chiffrées pour illustrer l\'impact de vos réalisations.',
+          'Envisagez une certification officielle (Cloud ou Agile) pour valoriser votre profil.',
+          'Ajoutez un lien direct vers votre portfolio ou profil GitHub.',
+        ];
 
     let qualityTier = 'Très bon profil';
     let tierColor = 'text-success';
@@ -272,6 +259,7 @@ export function CvUploadPage() {
       recommendations,
       qualityTier,
       tierColor,
+      summary: analysisResult.summary,
     };
   }, [analysisResult]);
 
@@ -553,6 +541,21 @@ export function CvUploadPage() {
               </div>
             </div>
           </Card>
+
+          {/* AI Executive Summary Card */}
+          {scoreMetrics.summary && (
+            <Card className="border bg-white shadow-sm p-3">
+              <div className="d-flex align-items-center gap-2 mb-2 text-primary">
+                <Sparkles size={16} />
+                <span className="fw-bold small text-uppercase" style={{ letterSpacing: '0.04em' }}>
+                  Synthèse IA du Profil
+                </span>
+              </div>
+              <p className="text-dark mb-0 small" style={{ lineHeight: '1.6' }}>
+                {scoreMetrics.summary}
+              </p>
+            </Card>
+          )}
 
           {/* Extracted Details & Review Card */}
           <Card

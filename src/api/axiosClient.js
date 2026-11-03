@@ -2,7 +2,6 @@ import axios from 'axios';
 import { APP_CONFIG } from '@/constants/config';
 
 let inMemoryAccessToken = null;
-let inMemoryRefreshToken = null;
 let onLogoutCallback = null;
 
 export function setAccessToken(token) {
@@ -13,38 +12,21 @@ export function getAccessToken() {
   return inMemoryAccessToken;
 }
 
-export function setRefreshToken(token) {
-  inMemoryRefreshToken = token;
-  try {
-    if (token) {
-      localStorage.setItem('t360_refresh_token', token);
-    } else {
-      localStorage.removeItem('t360_refresh_token');
-    }
-  } catch {}
-}
-
-export function getRefreshToken() {
-  if (inMemoryRefreshToken) return inMemoryRefreshToken;
-  try {
-    return localStorage.getItem('t360_refresh_token');
-  } catch {
-    return null;
-  }
-}
-
 export function setOnLogout(callback) {
   onLogoutCallback = callback;
 }
 
 export function clearAuthSession() {
   inMemoryAccessToken = null;
-  inMemoryRefreshToken = null;
+  // Ensure no tokens remain in any client-side storage
   try {
     localStorage.removeItem('t360_refresh_token');
+    sessionStorage.removeItem('t360_refresh_token');
     localStorage.removeItem('t360_has_session');
+    sessionStorage.removeItem('t360_has_session');
     localStorage.removeItem('t360_candidate_id');
   } catch {}
+
   if (typeof onLogoutCallback === 'function') {
     onLogoutCallback();
   }
@@ -58,6 +40,7 @@ export const axiosClient = axios.create({
   withCredentials: true,
 });
 
+// Attach in-memory access token to outgoing requests
 axiosClient.interceptors.request.use(
   config => {
     if (inMemoryAccessToken && !config.headers.Authorization) {
@@ -82,6 +65,7 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
+// Handle automatic token refresh when HTTP 401 is received
 axiosClient.interceptors.response.use(
   response => response,
   async error => {
@@ -93,7 +77,8 @@ axiosClient.interceptors.response.use(
       originalRequest._retry ||
       originalRequest.url?.includes('/api/auth/login') ||
       originalRequest.url?.includes('/api/auth/register') ||
-      originalRequest.url?.includes('/api/auth/refresh')
+      originalRequest.url?.includes('/api/auth/refresh') ||
+      originalRequest.url?.includes('/api/auth/logout')
     ) {
       return Promise.reject(error);
     }
@@ -113,9 +98,10 @@ axiosClient.interceptors.response.use(
     isRefreshing = true;
 
     try {
+      // The browser automatically sends the HttpOnly refreshToken cookie with withCredentials: true
       const response = await axios.post(
         `${APP_CONFIG.API_BASE_URL}/api/auth/refresh`,
-        { refreshToken: getRefreshToken() || '' },
+        {},
         { withCredentials: true }
       );
 
@@ -125,10 +111,6 @@ axiosClient.interceptors.response.use(
       }
 
       setAccessToken(newAccessToken);
-      if (response.data.refreshToken) {
-        setRefreshToken(response.data.refreshToken);
-      }
-
       processQueue(null, newAccessToken);
       originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
       return axiosClient(originalRequest);

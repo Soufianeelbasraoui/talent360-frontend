@@ -1,13 +1,10 @@
-import { axiosClient, setAccessToken, setRefreshToken, getRefreshToken, clearAuthSession } from './axiosClient';
+import { axiosClient, setAccessToken, clearAuthSession } from './axiosClient';
 
 export const authService = {
   async register(payload) {
     const response = await axiosClient.post('/api/auth/register', payload);
     if (response.data?.accessToken) {
       setAccessToken(response.data.accessToken);
-    }
-    if (response.data?.refreshToken) {
-      setRefreshToken(response.data.refreshToken);
     }
     return response.data;
   },
@@ -17,22 +14,14 @@ export const authService = {
     if (response.data?.accessToken) {
       setAccessToken(response.data.accessToken);
     }
-    if (response.data?.refreshToken) {
-      setRefreshToken(response.data.refreshToken);
-    }
     return response.data;
   },
 
-  async refreshToken(refreshToken) {
-    const token = refreshToken || getRefreshToken();
-    const response = await axiosClient.post('/api/auth/refresh', {
-      refreshToken: token || '',
-    });
+  async refreshToken() {
+    // Refresh token is stored in an HttpOnly cookie and sent automatically by the browser
+    const response = await axiosClient.post('/api/auth/refresh', {});
     if (response.data?.accessToken) {
       setAccessToken(response.data.accessToken);
-    }
-    if (response.data?.refreshToken) {
-      setRefreshToken(response.data.refreshToken);
     }
     return response.data;
   },

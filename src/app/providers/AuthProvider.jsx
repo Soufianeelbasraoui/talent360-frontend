@@ -16,7 +16,6 @@ export function AuthProvider({ children }) {
       await authService.logout();
     } catch {
     } finally {
-      try { localStorage.removeItem('t360_has_session'); } catch {}
       setUser(null);
       setCandidateProfile(null);
     }
@@ -38,7 +37,6 @@ export function AuthProvider({ children }) {
       email: authData.email,
       role: authData.role,
     };
-    try { localStorage.setItem('t360_has_session', '1'); } catch {}
     setUser(userInfo);
 
     if (authData.role === Role.CANDIDATE) {
@@ -57,12 +55,6 @@ export function AuthProvider({ children }) {
     });
 
     const initAuth = async () => {
-      let hasPriorSession = false;
-      try { hasPriorSession = localStorage.getItem('t360_has_session') === '1'; } catch {}
-      if (!hasPriorSession) {
-        if (isMounted) setIsLoading(false);
-        return;
-      }
       try {
         const refreshRes = await authService.refreshToken();
         if (refreshRes && isMounted) {

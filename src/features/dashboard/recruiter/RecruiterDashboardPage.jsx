@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { jobService } from '@/api/jobService';
+import { dashboardService } from '@/api/dashboardService';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { ROUTES } from '@/constants/routes';
@@ -11,7 +11,7 @@ import {
   Sparkles,
   Award,
   Plus,
-  TrendingUp,
+  Send,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -26,64 +26,19 @@ import {
 export function RecruiterDashboardPage() {
   const { user } = useAuth();
 
-  const {
-    data: jobsData,
-      } = useQuery({
-    queryKey: ['recruiter', 'jobs'],
-    queryFn: () => jobService.searchJobs({ size: 10 }),
+  const { data: statsData } = useQuery({
+    queryKey: ['recruiter-dashboard-stats'],
+    queryFn: () => dashboardService.getRecruiterStats(),
   });
 
-  const jobs = jobsData?.content || [];
-  const activeJobsCount = jobs.filter(j => j.status === 'OPEN').length || 8;
+  const activeJobsCount = statsData?.activeJobs ?? 0;
+  const totalApplications = statsData?.totalApplications ?? 0;
+  const totalCandidates = statsData?.totalCandidates ?? 0;
+  const aiAnalyzedCount = statsData?.aiAnalyzedCount ?? 0;
+  const topCandidatesCount = statsData?.topCandidatesCount ?? 0;
 
-  const totalApplications = 126;
-  const totalCandidates = 97;
-  const aiAnalyzedCount = 110;
-  const topCandidatesCount = 24;
-
-  const chartData = [
-    { job: 'Senior Java Lead', applications: 38 },
-    { job: 'Full-Stack React', applications: 29 },
-    { job: 'DevOps / Cloud', applications: 24 },
-    { job: 'Product Designer', applications: 18 },
-    { job: 'QA Engineer', applications: 12 },
-    { job: 'Data Analyst', applications: 5 },
-  ];
-
-  const recentActivities = [
-    {
-      id: 1,
-      title: 'New application received',
-      candidate: 'Sara El Mansouri',
-      job: 'Senior Java Lead',
-      score: 92,
-      time: '15 mins ago',
-    },
-    {
-      id: 2,
-      title: 'AI Analysis completed',
-      candidate: 'Youssef Bennani',
-      job: 'Full-Stack React Engineer',
-      score: 87,
-      time: '1 hour ago',
-    },
-    {
-      id: 3,
-      title: 'Stage moved to Screening',
-      candidate: 'Ahmed Tazi',
-      job: 'DevOps Engineer',
-      score: 79,
-      time: '3 hours ago',
-    },
-    {
-      id: 4,
-      title: 'Candidate hired',
-      candidate: 'Salma Chraibi',
-      job: 'Product Designer',
-      score: 95,
-      time: 'Yesterday',
-    },
-  ];
+  const chartData = statsData?.chartData || [];
+  const recentActivities = statsData?.recentActivities || [];
 
   return (
     <div>
@@ -118,9 +73,9 @@ export function RecruiterDashboardPage() {
           <Card className="h-100 p-3 border-0 shadow-sm">
             <div className="text-muted small fw-medium">Applications</div>
             <div className="fs-3 fw-bold text-dark mt-1">{totalApplications}</div>
-            <div className="text-success small mt-1 d-flex align-items-center gap-1">
-              <TrendingUp size={12} />
-              <span>+14% this month</span>
+            <div className="text-muted small mt-1 d-flex align-items-center gap-1">
+              <Send size={12} />
+              <span>Pipeline global</span>
             </div>
           </Card>
         </div>
@@ -208,24 +163,32 @@ export function RecruiterDashboardPage() {
             }
           >
             <div className="d-flex flex-column gap-3">
-              {recentActivities.map(item => (
-                <div key={item.id} className="d-flex align-items-start justify-content-between pb-2 border-bottom">
-                  <div>
-                    <div className="small fw-semibold text-dark">{item.candidate}</div>
-                    <div className="text-muted small" style={{ fontSize: '0.75rem' }}>
-                      {item.title} &bull; <span className="text-secondary">{item.job}</span>
-                    </div>
-                  </div>
-                  <div className="text-end">
-                    <span className="badge bg-success bg-opacity-10 text-success small border border-success border-opacity-25">
-                      {item.score}% match
-                    </span>
-                    <div className="text-muted" style={{ fontSize: '0.6875rem' }}>
-                      {item.time}
-                    </div>
-                  </div>
+              {recentActivities.length === 0 ? (
+                <div className="text-center py-4 text-muted small">
+                  Aucune activité récente pour le moment.
                 </div>
-              ))}
+              ) : (
+                recentActivities.map(item => (
+                  <div key={item.id} className="d-flex align-items-start justify-content-between pb-2 border-bottom">
+                    <div>
+                      <div className="small fw-semibold text-dark">{item.candidate}</div>
+                      <div className="text-muted small" style={{ fontSize: '0.75rem' }}>
+                        {item.title} &bull; <span className="text-secondary">{item.job}</span>
+                      </div>
+                    </div>
+                    <div className="text-end">
+                      {item.score != null && (
+                        <span className="badge bg-success bg-opacity-10 text-success small border border-success border-opacity-25">
+                          {Math.round(item.score)}% match
+                        </span>
+                      )}
+                      <div className="text-muted" style={{ fontSize: '0.6875rem' }}>
+                        {item.time}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </Card>
         </div>

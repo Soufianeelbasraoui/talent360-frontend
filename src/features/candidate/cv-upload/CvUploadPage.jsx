@@ -84,11 +84,11 @@ export function CvUploadPage() {
       const aiData = await aiService.analyzeCv(documentId, force);
       setAnalysisResult({
         skills: aiData.skills?.length ? aiData.skills : (candidateProfile?.skills?.length ? candidateProfile.skills : []),
-        experienceYears: aiData.experienceYears ?? (candidateProfile?.experienceYears || 2),
-        education: aiData.education || candidateProfile?.education || "Diplôme d'Ingénieur / Master (Bac+5)",
-        languages: aiData.languages?.length ? aiData.languages : ['Français (Courant)', 'Anglais (Professionnel)'],
+        experienceYears: aiData.experienceYears ?? (candidateProfile?.experienceYears ?? 0),
+        education: aiData.education || candidateProfile?.education || '',
+        languages: aiData.languages?.length ? aiData.languages : [],
         certifications: aiData.certifications || [],
-        cvScore: aiData.cvScore || 82,
+        cvScore: aiData.cvScore || 70,
         summary: aiData.summary || '',
         strengths: aiData.strengths || [],
         improvements: aiData.improvements || [],

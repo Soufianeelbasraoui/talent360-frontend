@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { userService } from '@/api/userService';
-import { jobService } from '@/api/jobService';
+import { dashboardService } from '@/api/dashboardService';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { DataTable } from '@/components/DataTable';
@@ -28,31 +28,24 @@ export function AdminDashboardPage() {
   const {
     data: usersData,
     isLoading: isUsersLoading,
-      } = useQuery({
+  } = useQuery({
     queryKey: ['admin-dashboard-users'],
     queryFn: () => userService.getAllUsers(0, 5),
   });
 
-  const { data: jobsData } = useQuery({
-    queryKey: ['admin-dashboard-jobs'],
-    queryFn: () => jobService.searchJobs({ size: 1 }),
+  const { data: statsData } = useQuery({
+    queryKey: ['admin-dashboard-stats'],
+    queryFn: () => dashboardService.getAdminStats(),
   });
 
-  const totalUsers = usersData?.totalElements || 48;
-  const activeUsers = Math.round(totalUsers * 0.92);
-  const publishedJobs = jobsData?.totalElements || 18;
-  const totalApplications = 142;
+  const totalUsers = statsData?.totalUsers ?? usersData?.totalElements ?? 0;
+  const activeUsers = statsData?.activeUsers ?? 0;
+  const publishedJobs = statsData?.publishedJobs ?? 0;
+  const totalApplications = statsData?.totalApplications ?? 0;
+  const engagementRate = totalUsers > 0 ? Math.round((activeUsers / totalUsers) * 100) : 0;
 
   const recentUsers = usersData?.content || [];
-
-  const growthData = [
-    { month: 'May', users: 14, applications: 28 },
-    { month: 'Jun', users: 22, applications: 45 },
-    { month: 'Jul', users: 31, applications: 72 },
-    { month: 'Aug', users: 38, applications: 94 },
-    { month: 'Sep', users: 44, applications: 120 },
-    { month: 'Oct', users: totalUsers, applications: totalApplications },
-  ];
+  const growthData = statsData?.growthData || [];
 
   const columns = [
     {
@@ -119,7 +112,7 @@ export function AdminDashboardPage() {
             <div className="fs-3 fw-bold text-success mt-1">{activeUsers}</div>
             <div className="text-muted small mt-1 d-flex align-items-center gap-1">
               <UserCheck size={12} className="text-success" />
-              <span>92% engagement rate</span>
+              <span>{engagementRate}% engagement rate</span>
             </div>
           </Card>
         </div>

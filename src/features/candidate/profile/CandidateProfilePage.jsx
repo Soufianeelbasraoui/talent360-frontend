@@ -62,11 +62,11 @@ export function CandidateProfilePage() {
       firstName: '',
       lastName: '',
       phone: '',
-      location: 'Casablanca',
+      location: '',
       linkedin: '',
       github: '',
       bio: '',
-      experienceYears: 3,
+      experienceYears: 0,
       education: '',
       preferredWorkMode: WorkMode.HYBRID,
       preferredContractType: ContractType.CDI,
@@ -102,7 +102,7 @@ export function CandidateProfilePage() {
             preferredContractType: parsedPreferences.contractType || ContractType.CDI,
           });
 
-          setSkills(candidate.skills || ['Java', 'Spring Boot', 'React', 'Docker']);
+          setSkills(candidate.skills || []);
         }
       } catch (err) {
         toastError(getErrorMessage(err, 'Impossible de charger votre profil.'));

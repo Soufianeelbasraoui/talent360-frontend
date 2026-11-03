@@ -172,7 +172,7 @@ export function CandidateProfilePage() {
         preferencesJson,
       };
 
-      await candidateService.updateCandidate(candidateProfile?.id || user?.id, payload);
+      await candidateService.updateCandidate(candidateProfile?.id || 'me', payload);
       await refreshProfile();
       toastSuccess('Profil mis à jour et enregistré avec succès.');
     } catch (err) {

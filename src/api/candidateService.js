@@ -32,19 +32,20 @@ export const candidateService = {
     return null;
   },
 
-  async updateCandidate(id, data) {
+  async updateCandidate(id = 'me', data = {}) {
     let candidateId = id;
     if (!candidateId || candidateId === 'me') {
-      try { candidateId = localStorage.getItem('t360_candidate_id'); } catch {}
-    }
-    if (!candidateId || candidateId === 'me') {
       try {
-        const me = await axiosClient.get('/api/candidates/me');
-        if (me.data?.id) {
-          candidateId = me.data.id;
-          try { localStorage.setItem('t360_candidate_id', String(candidateId)); } catch {}
+        const response = await axiosClient.put('/api/candidates/me', data);
+        if (response.data?.id) {
+          try { localStorage.setItem('t360_candidate_id', String(response.data.id)); } catch {}
         }
-      } catch {}
+        return response.data;
+      } catch (meErr) {
+        // Fallback to cached ID if /me PUT isn't supported or fails
+        try { candidateId = localStorage.getItem('t360_candidate_id'); } catch {}
+        if (!candidateId) throw meErr;
+      }
     }
     const response = await axiosClient.put(`/api/candidates/${candidateId}`, data);
     return response.data;

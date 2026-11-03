@@ -176,7 +176,9 @@ export function CvUploadPage() {
     if (!analysisResult) return;
     setIsSavingReview(true);
     try {
-      await candidateService.updateCandidate(candidateProfile?.id || user?.id, {
+      await candidateService.updateCandidate(candidateProfile?.id || 'me', {
+        firstName: candidateProfile?.firstName || undefined,
+        lastName: candidateProfile?.lastName || undefined,
         skills: analysisResult.skills,
         experienceYears: analysisResult.experienceYears,
         education: analysisResult.education,

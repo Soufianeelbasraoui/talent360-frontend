@@ -45,22 +45,13 @@ export function CvUploadPage() {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [newSkillInput, setNewSkillInput] = useState('');
 
-  // If candidate already has an active document, auto-load cached or compute initial analysis if profile has data
+  // Auto-fetch real analysis from backend if candidate has an uploaded document
   useEffect(() => {
-    if (candidateProfile) {
-      setAnalysisResult((prev) => {
-        if (!prev && (candidateProfile.skills?.length > 0 || candidateProfile.experienceYears > 0)) {
-          return {
-            skills: candidateProfile.skills || ['Java', 'Spring Boot', 'React'],
-            experienceYears: candidateProfile.experienceYears || 2,
-            education: candidateProfile.education || 'Master / Diplôme d\'Ingénieur',
-            languages: ['Français', 'Anglais'],
-          };
-        }
-        return prev;
-      });
+    if (activeDocument?.id && !analysisResult && !isAnalyzing) {
+      runAnalysis(activeDocument.id);
     }
-  }, [candidateProfile]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeDocument?.id]);
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -137,7 +128,7 @@ export function CvUploadPage() {
       await refreshProfile();
 
       if (uploadedDoc?.id) {
-        await runAnalysis(uploadedDoc.id);
+        await runAnalysis(uploadedDoc.id, true);
       }
     } catch (err) {
       toastError(getErrorMessage(err, 'Échec du téléversement du document. Veuillez réessayer.'));
@@ -391,6 +382,35 @@ export function CvUploadPage() {
           <p className="text-muted small mb-0">
             Extraction des compétences techniques, estimation de l'expérience, formation et calcul du score de pertinence.
           </p>
+        </Card>
+      )}
+
+      {/* Empty State Banner when no analysis yet */}
+      {!analysisResult && !isAnalyzing && (
+        <Card className="mb-4 p-4 text-center border bg-light">
+          <div className="d-flex flex-column align-items-center justify-content-center py-2">
+            <div className="d-inline-flex p-3 rounded-circle bg-primary bg-opacity-10 text-primary mb-2">
+              <Sparkles size={24} />
+            </div>
+            <h4 className="fs-6 fw-semibold text-dark mb-1">
+              {activeDocument ? "Votre CV est prêt pour l'analyse IA" : "Aucun CV analysé pour le moment"}
+            </h4>
+            <p className="text-muted small mb-3" style={{ maxWidth: '480px' }}>
+              {activeDocument
+                ? "Cliquez ci-dessous pour extraire vos compétences réelles, vos années d'expérience et calculer votre score d'attractivité recruteur."
+                : "Glissez-déposez votre CV ci-dessus au format PDF ou DOCX pour lancer l'audit et l'extraction automatique de vos compétences."}
+            </p>
+            {activeDocument && (
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={handleTriggerAnalysis}
+                icon={<Sparkles size={14} />}
+              >
+                Lancer l'analyse IA de mon CV
+              </Button>
+            )}
+          </div>
         </Card>
       )}
 

@@ -51,24 +51,14 @@ export const candidateService = {
   },
 
   async uploadCv(candidateId, file, onUploadProgress) {
-    let cId = candidateId;
-    if (!cId || cId === 'me') {
-      try { cId = localStorage.getItem('t360_candidate_id'); } catch {}
-    }
-    if (!cId || cId === 'me') {
-      try {
-        const me = await axiosClient.get('/api/candidates/me');
-        if (me.data?.id) {
-          cId = me.data.id;
-          try { localStorage.setItem('t360_candidate_id', String(cId)); } catch {}
-        }
-      } catch {}
-    }
-
     const formData = new FormData();
     formData.append('file', file);
 
-    const response = await axiosClient.post(`/api/candidates/${cId}/cv`, formData, {
+    const url = candidateId && candidateId !== 'me'
+      ? `/api/candidates/${candidateId}/cv`
+      : '/api/candidates/me/cv';
+
+    const response = await axiosClient.post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -78,21 +68,19 @@ export const candidateService = {
   },
 
   async downloadCv(candidateId) {
-    let cId = candidateId;
-    if (!cId || cId === 'me') {
-      try { cId = localStorage.getItem('t360_candidate_id'); } catch {}
-    }
-    const response = await axiosClient.get(`/api/candidates/${cId}/cv`, {
+    const url = candidateId && candidateId !== 'me'
+      ? `/api/candidates/${candidateId}/cv`
+      : '/api/candidates/me/cv';
+    const response = await axiosClient.get(url, {
       responseType: 'blob',
     });
     return response.data;
   },
 
   async deleteCv(candidateId) {
-    let cId = candidateId;
-    if (!cId || cId === 'me') {
-      try { cId = localStorage.getItem('t360_candidate_id'); } catch {}
-    }
-    await axiosClient.delete(`/api/candidates/${cId}/cv`);
+    const url = candidateId && candidateId !== 'me'
+      ? `/api/candidates/${candidateId}/cv`
+      : '/api/candidates/me/cv';
+    await axiosClient.delete(url);
   },
 };

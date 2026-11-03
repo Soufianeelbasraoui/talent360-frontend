@@ -83,7 +83,7 @@ export function CandidateProfileViewPage() {
         <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
           <div className="d-flex align-items-center gap-3">
             <div
-              className="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle fs-5 fw-bold"
+              className="d-flex align-items-center justify-content-center bg-primary text-white rounded fs-5 fw-bold"
               style={{ width: '56px', height: '56px' }}
             >
               {candidate.firstName?.[0] || 'C'}

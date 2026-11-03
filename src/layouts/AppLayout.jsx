@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Link, Outlet, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { useAuth } from '@/hooks/useAuth';
 import { ROUTES } from '@/constants/routes';
@@ -18,6 +18,7 @@ import {
   LineChart,
   Settings,
   Sparkles,
+  ArrowLeft,
 } from 'lucide-react';
 
 export function AppLayout() {
@@ -189,20 +190,42 @@ export function AppLayout() {
       />
 
       <aside className={clsx('app-sidebar', sidebarOpen && 'open')}>
-        <div className="sidebar-header d-flex align-items-center gap-2">
-          <div
-            className="d-flex align-items-center justify-content-center bg-primary text-white rounded"
-            style={{ width: '32px', height: '32px' }}
+        <div className="sidebar-header d-flex align-items-center justify-content-between">
+          <Link to={ROUTES.ROOT} className="d-flex align-items-center gap-2 text-decoration-none">
+            <div
+              className="d-flex align-items-center justify-content-center bg-primary text-white rounded"
+              style={{ width: '32px', height: '32px' }}
+            >
+              <Target size={18} />
+            </div>
+            <span className="fw-bold fs-6 text-dark">Talent360</span>
+          </Link>
+
+          <Link
+            to={ROUTES.ROOT}
+            className="btn btn-secondary btn-sm p-1 border text-muted"
+            title="Retourner à la page d'accueil"
+            aria-label="Retourner à la page d'accueil"
           >
-            <Target size={18} />
-          </div>
-          <span className="fw-bold fs-6 text-dark">Talent360</span>
+            <ArrowLeft size={16} />
+          </Link>
         </div>
 
         <nav className="sidebar-nav">
           {renderNavLinks()}
 
-          <div className="nav-section-title mt-4">Preferences</div>
+          <div className="nav-section-title mt-4">Site Public</div>
+          <NavLink
+            to={ROUTES.ROOT}
+            onClick={closeSidebar}
+            className="nav-item text-muted"
+            title="Retourner à la page d'accueil"
+          >
+            <ArrowLeft size={18} />
+            <span>Retour à l&apos;accueil</span>
+          </NavLink>
+
+          <div className="nav-section-title mt-3">Preferences</div>
           <NavLink
             to={ROUTES.SETTINGS}
             onClick={closeSidebar}

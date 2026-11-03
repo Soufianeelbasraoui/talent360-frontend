@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/useToast';
 import { registerSchema } from '../schemas/authSchemas';
@@ -18,6 +18,10 @@ export function RegisterPage() {
   const { register: registerAuth } = useAuth();
   const { error: toastError, success: toastSuccess } = useToast();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const queryRole = searchParams.get('role');
+  const initialRole = queryRole === Role.RECRUITER ? Role.RECRUITER : Role.CANDIDATE;
 
   const {
     register,
@@ -30,11 +34,19 @@ export function RegisterPage() {
     defaultValues: {
       email: '',
       password: '',
-      role: Role.CANDIDATE,
+      role: initialRole,
       firstName: '',
       lastName: '',
     },
   });
+
+  useEffect(() => {
+    if (queryRole === Role.RECRUITER) {
+      setValue('role', Role.RECRUITER);
+    } else if (queryRole === Role.CANDIDATE) {
+      setValue('role', Role.CANDIDATE);
+    }
+  }, [queryRole, setValue]);
 
   const selectedRole = watch('role');
 

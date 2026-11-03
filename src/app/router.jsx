@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import { AppLayout } from '@/layouts/AppLayout';
+import { JobLayout } from '@/layouts/JobLayout';
 import { ProtectedRoute } from '@/routes/ProtectedRoute';
 import { RoleRoute } from '@/routes/RoleRoute';
 import { ROUTES } from '@/constants/routes';
@@ -28,6 +29,9 @@ function RootRedirect() {
   return <Navigate to={ROUTES.CANDIDATE_DASHBOARD} replace />;
 }
 
+const LandingPage = lazy(() =>
+  import('@/features/landing/LandingPage').then(m => ({ default: m.LandingPage }))
+);
 const LoginPage = lazy(() =>
   import('@/features/auth/pages/LoginPage').then(m => ({ default: m.LoginPage }))
 );
@@ -114,7 +118,11 @@ const NotFoundPage = lazy(() =>
 export const router = createBrowserRouter([
   {
     path: ROUTES.ROOT,
-    element: <RootRedirect />,
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <LandingPage />
+      </Suspense>
+    ),
   },
   {
     element: <AuthLayout />,
@@ -132,6 +140,27 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <RegisterPage />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    element: <JobLayout />,
+    children: [
+      {
+        path: ROUTES.JOBS,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <JobListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.JOB_DETAIL,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <JobDetailPage />
           </Suspense>
         ),
       },
@@ -182,22 +211,6 @@ export const router = createBrowserRouter([
               <MyApplicationsPage />
             </Suspense>
           </RoleRoute>
-        ),
-      },
-      {
-        path: ROUTES.JOBS,
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <JobListPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: ROUTES.JOB_DETAIL,
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <JobDetailPage />
-          </Suspense>
         ),
       },
 

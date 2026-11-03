@@ -1,6 +1,7 @@
 @import './variables';
 @import 'bootstrap/scss/bootstrap';
 @import './bootstrap-overrides';
+@import './landing';
 
 .app-container {
   display: flex;

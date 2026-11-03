@@ -83,6 +83,7 @@ export function LoginPage() {
             variant="primary"
             className="w-100"
             isLoading={isSubmitting}
+            disabled={isSubmitting}
             icon={<ArrowRight size={16} />}
           >
             Continue

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/useToast';
 import { registerSchema } from '../schemas/authSchemas';
@@ -11,44 +11,29 @@ import { ROUTES } from '@/constants/routes';
 import { Role } from '@/constants/enums';
 import { getErrorMessage } from '@/utils/errors';
 import { Mail, Lock, User, Briefcase, ArrowRight } from 'lucide-react';
-import clsx from 'clsx';
 
 export function RegisterPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register: registerAuth } = useAuth();
   const { error: toastError, success: toastSuccess } = useToast();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-
-  const queryRole = searchParams.get('role');
-  const initialRole = queryRole === Role.RECRUITER ? Role.RECRUITER : Role.CANDIDATE;
 
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(registerSchema),
     defaultValues: {
       email: '',
       password: '',
-      role: initialRole,
+      confirmPassword: '',
+      role: Role.CANDIDATE,
       firstName: '',
       lastName: '',
     },
   });
-
-  useEffect(() => {
-    if (queryRole === Role.RECRUITER) {
-      setValue('role', Role.RECRUITER);
-    } else if (queryRole === Role.CANDIDATE) {
-      setValue('role', Role.CANDIDATE);
-    }
-  }, [queryRole, setValue]);
-
-  const selectedRole = watch('role');
 
   const onSubmit = async (values) => {
     setIsSubmitting(true);
@@ -77,16 +62,11 @@ export function RegisterPage() {
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         
         <div className="mb-3 text-start">
-          <span className="form-label d-block">I am a</span>
+          <span className="form-label d-block">Account Profile</span>
           <div className="d-grid gap-2" style={{ gridTemplateColumns: '1fr 1fr' }}>
             <button
               type="button"
-              className={clsx(
-                'btn text-start p-3 d-flex flex-column gap-1 border',
-                selectedRole === Role.CANDIDATE
-                  ? 'border-primary bg-primary bg-opacity-10 text-primary'
-                  : 'btn-secondary text-muted'
-              )}
+              className="btn text-start p-3 d-flex flex-column gap-1 border border-primary bg-primary bg-opacity-10 text-primary"
               onClick={() => setValue('role', Role.CANDIDATE, { shouldValidate: true })}
             >
               <div className="d-flex align-items-center gap-2 fw-semibold">
@@ -94,26 +74,26 @@ export function RegisterPage() {
                 <span>Candidate</span>
               </div>
               <span className="small text-muted" style={{ fontSize: '0.6875rem' }}>
-                Looking for opportunities
+                Job seeker &amp; applicant profile
               </span>
             </button>
 
             <button
               type="button"
-              className={clsx(
-                'btn text-start p-3 d-flex flex-column gap-1 border',
-                selectedRole === Role.RECRUITER
-                  ? 'border-primary bg-primary bg-opacity-10 text-primary'
-                  : 'btn-secondary text-muted'
-              )}
-              onClick={() => setValue('role', Role.RECRUITER, { shouldValidate: true })}
+              disabled
+              title="Recruiter accounts must be provisioned by an organization administrator."
+              className="btn text-start p-3 d-flex flex-column gap-1 border btn-secondary text-muted opacity-75"
+              style={{ cursor: 'not-allowed' }}
             >
-              <div className="d-flex align-items-center gap-2 fw-semibold">
-                <Briefcase size={16} />
-                <span>Recruiter</span>
+              <div className="d-flex align-items-center justify-content-between">
+                <div className="d-flex align-items-center gap-2 fw-semibold">
+                  <Briefcase size={16} />
+                  <span>Recruiter</span>
+                </div>
+                <span className="badge bg-secondary text-white" style={{ fontSize: '0.6rem' }}>Admin invite</span>
               </div>
               <span className="small text-muted" style={{ fontSize: '0.6875rem' }}>
-                Hiring talent &amp; posting jobs
+                Enterprise invite only
               </span>
             </button>
           </div>
@@ -153,10 +133,19 @@ export function RegisterPage() {
         <Input
           label="Password"
           type="password"
-          placeholder="At least 6 characters"
+          placeholder="Min 8 chars (A-Z, a-z, 0-9, symbol)"
           leftIcon={<Lock size={16} />}
           error={errors.password?.message}
           {...register('password')}
+        />
+
+        <Input
+          label="Confirm Password"
+          type="password"
+          placeholder="Repeat your password"
+          leftIcon={<Lock size={16} />}
+          error={errors.confirmPassword?.message}
+          {...register('confirmPassword')}
         />
 
         <div className="pt-2">
@@ -165,6 +154,7 @@ export function RegisterPage() {
             variant="primary"
             className="w-100"
             isLoading={isSubmitting}
+            disabled={isSubmitting}
             icon={<ArrowRight size={16} />}
           >
             Continue

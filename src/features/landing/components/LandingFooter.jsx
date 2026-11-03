@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Target, Github, Linkedin, Twitter, Heart } from 'lucide-react';
+import { Target, Github, Linkedin, Twitter } from 'lucide-react';
 import { ROUTES } from '@/constants/routes';
 
 export function LandingFooter() {

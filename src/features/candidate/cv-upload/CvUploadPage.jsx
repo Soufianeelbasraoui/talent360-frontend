@@ -20,8 +20,6 @@ import {
   CheckCircle2,
   Plus,
   RefreshCw,
-  TrendingUp,
-  AlertCircle,
   Lightbulb,
   Award,
   Layers,
@@ -49,15 +47,18 @@ export function CvUploadPage() {
 
   // If candidate already has an active document, auto-load cached or compute initial analysis if profile has data
   useEffect(() => {
-    if (candidateProfile && !analysisResult) {
-      if (candidateProfile.skills?.length > 0 || candidateProfile.experienceYears > 0) {
-        setAnalysisResult({
-          skills: candidateProfile.skills || ['Java', 'Spring Boot', 'React'],
-          experienceYears: candidateProfile.experienceYears || 2,
-          education: candidateProfile.education || 'Master / Diplôme d\'Ingénieur',
-          languages: ['Français', 'Anglais'],
-        });
-      }
+    if (candidateProfile) {
+      setAnalysisResult((prev) => {
+        if (!prev && (candidateProfile.skills?.length > 0 || candidateProfile.experienceYears > 0)) {
+          return {
+            skills: candidateProfile.skills || ['Java', 'Spring Boot', 'React'],
+            experienceYears: candidateProfile.experienceYears || 2,
+            education: candidateProfile.education || 'Master / Diplôme d\'Ingénieur',
+            languages: ['Français', 'Anglais'],
+          };
+        }
+        return prev;
+      });
     }
   }, [candidateProfile]);
 
@@ -660,9 +661,9 @@ export function CvUploadPage() {
 
               {/* Languages */}
               <div className="col-12">
-                <label className="form-label fw-semibold d-block text-dark small mb-1">
+                <span className="form-label fw-semibold d-block text-dark small mb-1">
                   Langues détectées
-                </label>
+                </span>
                 <div className="d-flex flex-wrap gap-1.5">
                   {analysisResult.languages.map((lang, idx) => (
                     <span key={idx} className="badge bg-light text-dark border px-2 py-1">

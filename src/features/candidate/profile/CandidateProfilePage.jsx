@@ -19,14 +19,12 @@ import {
   Phone,
   Globe,
   Award,
-  CheckCircle2,
   User,
   GraduationCap,
   Briefcase,
   FileText,
   Sparkles,
   ArrowRight,
-  MapPin,
   ExternalLink,
 } from 'lucide-react';
 import clsx from 'clsx';

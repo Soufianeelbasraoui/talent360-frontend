@@ -26,12 +26,8 @@ import {
   CheckCircle2,
   ChevronLeft,
   FileText,
-  User,
-  Sparkles,
   ArrowRight,
   AlertCircle,
-  MessageSquare,
-  Clock,
 } from 'lucide-react';
 
 export function JobDetailPage() {

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { aiService } from '@/api/aiService';
@@ -20,10 +19,7 @@ import {
   Medal,
   ChevronLeft,
   ArrowRight,
-  CheckCircle2,
-  SlidersHorizontal,
   Kanban,
-  Sparkles,
 } from 'lucide-react';
 
 export function CandidateRankingPage() {

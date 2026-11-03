@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { Menu, LogOut, User, ArrowLeft } from 'lucide-react';
+import { Menu, LogOut, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { Role } from '@/constants/enums';
 import { ROUTES } from '@/constants/routes';

@@ -18,13 +18,7 @@ import {
   CheckCircle2,
   Clock,
   Search,
-  Filter,
-  Sparkles,
-  AlertCircle,
-  Building2,
   Calendar,
-  ChevronRight,
-  FileText,
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -49,7 +43,7 @@ export function MyApplicationsPage() {
     queryFn: () => applicationService.getMyApplications(0, 50),
   });
 
-  const rawApplications = applicationsData?.content || [];
+  const rawApplications = useMemo(() => applicationsData?.content || [], [applicationsData]);
 
   // Filtered applications
   const applications = useMemo(() => {

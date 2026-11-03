@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Target, Menu, X, ArrowRight, LogOut, LayoutDashboard, User, ChevronDown } from 'lucide-react';
+import { Target, Menu, X, ArrowRight, LogOut, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { ROUTES } from '@/constants/routes';
 import { Role } from '@/constants/enums';

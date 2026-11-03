@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import { AppLayout } from '@/layouts/AppLayout';
 import { JobLayout } from '@/layouts/JobLayout';
@@ -8,7 +8,6 @@ import { RoleRoute } from '@/routes/RoleRoute';
 import { ROUTES } from '@/constants/routes';
 import { Role } from '@/constants/enums';
 import { Skeleton } from '@/components/Skeleton';
-import { useAuth } from '@/hooks/useAuth';
 
 function PageLoader() {
   return (
@@ -16,17 +15,6 @@ function PageLoader() {
       <Skeleton count={4} height={45} className="mb-3" />
     </div>
   );
-}
-
-function RootRedirect() {
-  const { user, isLoading } = useAuth();
-
-  if (isLoading) return <PageLoader />;
-  if (!user) return <Navigate to={ROUTES.LOGIN} replace />;
-
-  if (user.role === Role.ADMIN) return <Navigate to={ROUTES.ADMIN_DASHBOARD} replace />;
-  if (user.role === Role.RECRUITER) return <Navigate to={ROUTES.RECRUITER_DASHBOARD} replace />;
-  return <Navigate to={ROUTES.CANDIDATE_DASHBOARD} replace />;
 }
 
 const LandingPage = lazy(() =>

@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { jobService } from '@/api/jobService';
 import { useAuth } from '@/hooks/useAuth';
 import { Role } from '@/constants/enums';
-import { MapPin, Briefcase, ArrowRight, Sparkles, Building2, Clock } from 'lucide-react';
+import { MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import { ScoreRing } from '@/components/ScoreRing';
 import { Skeleton } from '@/components/Skeleton';
 import { formatContractType, formatWorkMode, formatDate } from '@/utils/formatters';

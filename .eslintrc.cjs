@@ -29,6 +29,7 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/no-unescaped-entities': 'off',
     'no-empty': ['error', { allowEmptyCatch: true }],
     'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
     'jsx-a11y/anchor-is-valid': 'off',

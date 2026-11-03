@@ -1,4 +1,4 @@
-import { FileText, Target, Sparkles, Kanban, BarChart3, Check } from 'lucide-react';
+import { FileText, Target, Sparkles, Kanban, BarChart3 } from 'lucide-react';
 import { ScoreRing } from '@/components/ScoreRing';
 
 export function FeaturesSection() {

@@ -33,18 +33,12 @@ import {
   Sparkles,
   Award,
   ChevronLeft,
-  User,
   GripVertical,
   ExternalLink,
   Search,
-  Filter,
   CheckCircle2,
-  Clock,
   ArrowRight,
-  TrendingUp,
   XCircle,
-  Eye,
-  SlidersHorizontal,
 } from 'lucide-react';
 import clsx from 'clsx';
 

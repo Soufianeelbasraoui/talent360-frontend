@@ -27,7 +27,6 @@ import {
   AlertCircle,
   ArrowRight,
   Briefcase,
-  Building2,
   Clock,
   RotateCcw,
   UserPlus,

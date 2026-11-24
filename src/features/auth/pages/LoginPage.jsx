@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -8,16 +8,22 @@ import { loginSchema } from '../schemas/authSchemas';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { ROUTES } from '@/constants/routes';
-import { Role } from '@/constants/enums';
 import { getErrorMessage } from '@/utils/errors';
+import { getRoleDashboard, isPathAllowedForRole } from '@/utils/navigation';
 import { Mail, Lock, ArrowRight } from 'lucide-react';
 
 export function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login } = useAuth();
+  const { login, user, isLoading } = useAuth();
   const { error: toastError, success: toastSuccess } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (!isLoading && user) {
+      navigate(getRoleDashboard(user.role), { replace: true });
+    }
+  }, [user, isLoading, navigate]);
 
   const {
     register,
@@ -35,15 +41,11 @@ export function LoginPage() {
       toastSuccess('Signed in successfully.');
 
       const from = location.state?.from?.pathname;
-      if (from && from !== ROUTES.LOGIN && from !== ROUTES.REGISTER) {
-        navigate(from, { replace: true });
-      } else if (res.role === Role.ADMIN) {
-        navigate(ROUTES.ADMIN_DASHBOARD, { replace: true });
-      } else if (res.role === Role.RECRUITER) {
-        navigate(ROUTES.RECRUITER_DASHBOARD, { replace: true });
-      } else {
-        navigate(ROUTES.CANDIDATE_DASHBOARD, { replace: true });
-      }
+      const targetRoute = from && isPathAllowedForRole(from, res.role)
+        ? from
+        : getRoleDashboard(res.role);
+
+      navigate(targetRoute, { replace: true });
     } catch (err) {
       toastError(getErrorMessage(err, 'Invalid credentials. Check your email and password.'));
     } finally {

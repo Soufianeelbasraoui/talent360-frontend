@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ShieldAlert, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/Button';
-import { ROUTES } from '@/constants/routes';
+import { useAuth } from '@/hooks/useAuth';
+import { getRoleDashboard } from '@/utils/navigation';
 
 export function ForbiddenPage() {
+  const { user } = useAuth();
+  const targetDashboard = getRoleDashboard(user?.role);
+
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center p-4 bg-light">
       <div
@@ -17,7 +21,7 @@ export function ForbiddenPage() {
         <p className="text-muted small mb-4">
           You do not have permission to view this resource. If you believe this is an error, please reach out to your administrator.
         </p>
-        <Link to={ROUTES.ROOT} className="d-inline-block">
+        <Link to={targetDashboard} className="d-inline-block">
           <Button variant="primary" size="sm" icon={<ArrowLeft size={14} />}>
             Return to Dashboard
           </Button>
